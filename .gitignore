@@ -1,3 +1,5 @@
 #for vim temp files
 *.swp
 *.swo
+#for pacp
+*.pcap
