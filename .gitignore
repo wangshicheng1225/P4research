@@ -3,3 +3,5 @@
 *.swo
 #for pacp
 *.pcap
+#for dot
+*.dot

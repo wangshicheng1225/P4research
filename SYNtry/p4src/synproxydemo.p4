@@ -27,7 +27,7 @@ parser start {
 	
 	set_metadata(meta.in_port, standard_metadata.ingress_port);
 	return  parse_ethernet;
-	}
+	
 }
 
 #define ETHERTYPE_IPV4 0x0800
@@ -182,7 +182,7 @@ header_type meta_t {
         tcpLength : 16;
         in_port : 8;
 	
-		reply_type:2//00 noreply  01 syn/ack  
+		reply_type:2;//00 noreply  01 syn/ack  
 		tcp_ack:1;
 		tcp_psh:1;
 		tcp_rst:1;
@@ -315,7 +315,7 @@ control ingress {
 	{
 		if (meta.tcp_session_is_SYN==0 and meta.tcp_session_is_ACK==0)
 		{
-			apply(session_init);	
+			apply(session_init_table);	
 		}
 
 	}
@@ -323,7 +323,7 @@ control ingress {
 	{
 		if (meta.tcp_session_is_SYN == 1 and meta.tcp_session_is_ACK == 0)
 		{
-			apply(session_complete);
+			apply(session_complete_table);
 		}
 	}
 
