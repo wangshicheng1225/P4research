@@ -292,11 +292,15 @@
                     13
                 ],
                 [
+                    "dstip_pktcount_map_index",
+                    13
+                ],
+                [
                     "tcp_session_id",
                     16
                 ],
                 [
-                    "nhop_iv4",
+                    "dstip_pktcount",
                     32
                 ],
                 [
@@ -309,7 +313,7 @@
                 ],
                 [
                     "_padding",
-                    2
+                    5
                 ]
             ],
             "length_exp": null,
@@ -745,6 +749,92 @@
                     ]
                 },
                 {
+                    "op": "modify_field_with_hash_based_offset",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount_map_index"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x0"
+                        },
+                        {
+                            "type": "calculation",
+                            "value": "dstip_map_hash"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0xd"
+                        }
+                    ]
+                },
+                {
+                    "op": "register_read",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        },
+                        {
+                            "type": "register_array",
+                            "value": "dstip_pktcount"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount_map_index"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "add_to_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "dstip_pktcount"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount_map_index"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "op": "register_read",
                     "parameters": [
                         {
@@ -793,8 +883,161 @@
             ]
         },
         {
-            "name": "complete_session",
+            "name": "setsyn_ack",
             "id": 1,
+            "runtime_data": [
+                {
+                    "name": "port",
+                    "bitwidth": 9
+                }
+            ],
+            "primitives": [
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "syn"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "ack"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "seqNo"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        },
+                        {
+                            "type": "runtime_data",
+                            "value": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "init_session",
+            "id": 2,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "reply_type"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "tcp_session_is_SYN"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "tcp_session_map_index"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "tcp_session_is_ACK"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "tcp_session_map_index"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "_drop",
+            "id": 3,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "drop",
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "name": "complete_session",
+            "id": 4,
             "runtime_data": [],
             "primitives": [
                 {
@@ -857,139 +1100,13 @@
         },
         {
             "name": "setack",
-            "id": 2,
-            "runtime_data": [
-                {
-                    "name": "port",
-                    "bitwidth": 9
-                }
-            ],
-            "primitives": [
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "syn"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x0"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "ack"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "standard_metadata",
-                                "egress_spec"
-                            ]
-                        },
-                        {
-                            "type": "runtime_data",
-                            "value": 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "_drop",
-            "id": 3,
-            "runtime_data": [],
-            "primitives": [
-                {
-                    "op": "drop",
-                    "parameters": []
-                }
-            ]
-        },
-        {
-            "name": "setsyn_ack",
-            "id": 4,
-            "runtime_data": [
-                {
-                    "name": "port",
-                    "bitwidth": 9
-                }
-            ],
-            "primitives": [
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "syn"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "ack"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "standard_metadata",
-                                "egress_spec"
-                            ]
-                        },
-                        {
-                            "type": "runtime_data",
-                            "value": 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "init_session",
             "id": 5,
-            "runtime_data": [],
+            "runtime_data": [
+                {
+                    "name": "port",
+                    "bitwidth": 9
+                }
+            ],
             "primitives": [
                 {
                     "op": "modify_field",
@@ -997,53 +1114,64 @@
                         {
                             "type": "field",
                             "value": [
-                                "meta",
-                                "reply_type"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "register_write",
-                    "parameters": [
-                        {
-                            "type": "register_array",
-                            "value": "tcp_session_is_SYN"
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "tcp_session_map_index"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "register_write",
-                    "parameters": [
-                        {
-                            "type": "register_array",
-                            "value": "tcp_session_is_ACK"
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "tcp_session_map_index"
+                                "tcp",
+                                "syn"
                             ]
                         },
                         {
                             "type": "hexstr",
                             "value": "0x0"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "ack"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "seqNo"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        },
+                        {
+                            "type": "runtime_data",
+                            "value": 0
                         }
                     ]
                 }
@@ -1540,6 +1668,13 @@
                 {
                     "type": "field",
                     "value": [
+                        "ipv4",
+                        "protocol"
+                    ]
+                },
+                {
+                    "type": "field",
+                    "value": [
                         "tcp",
                         "srcPort"
                     ]
@@ -1549,6 +1684,20 @@
                     "value": [
                         "tcp",
                         "dstPort"
+                    ]
+                }
+            ],
+            "algo": "crc16"
+        },
+        {
+            "name": "dstip_map_hash",
+            "id": 3,
+            "input": [
+                {
+                    "type": "field",
+                    "value": [
+                        "ipv4",
+                        "dstAddr"
                     ]
                 }
             ],
@@ -1603,6 +1752,12 @@
             "name": "tcp_session_is_ACK",
             "id": 1,
             "bitwidth": 8,
+            "size": 8192
+        },
+        {
+            "name": "dstip_pktcount",
+            "id": 2,
+            "bitwidth": 32,
             "size": 8192
         }
     ],

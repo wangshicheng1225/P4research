@@ -189,8 +189,13 @@ header_type meta_t {
 		tcp_syn:1;
 		tcp_fin:1;
 		tcp_session_map_index :  13;
+		dstip_pktcount_map_index: 13;
+								 
 		tcp_session_id : 16;
-		nhop_iv4: 32; 
+		
+		dstip_pktcount:32;	 
+	
+
 		tcp_session_is_SYN: 8;// this session has sent a syn to switch
 		tcp_session_is_ACK: 8;// this session has sent a ack to switch
 		
@@ -204,8 +209,9 @@ field_list l3_hash_fields {
 
     ipv4.srcAddr;   
 	ipv4.dstAddr;
-	//ipv4.protocol;
-	tcp.srcPort;
+	ipv4.protocol;
+	tcp.srcPort;	
+
 	tcp.dstPort;
 }
 field_list_calculation tcp_session_map_hash {
@@ -214,6 +220,18 @@ field_list_calculation tcp_session_map_hash {
 	}
 	algorithm: crc16;
 	output_width: 13;
+}
+
+field_list dstip_hash_fields {
+	ipv4.dstAddr;
+}
+
+field_list_calculation dstip_map_hash {
+	input {
+		dstip_hash_fields;
+	}
+	algorithm:crc16;
+	output_width:13;
 }
 
 register tcp_session_is_SYN {
@@ -226,6 +244,24 @@ register tcp_session_is_ACK {
 	instance_count: 8192;
 }
 
+register dstip_pktcount {
+	width : 32; 
+	instance_count: 8192;
+}
+
+
+register temp_hash {
+	width:32;
+	instance_count: 10;
+}
+
+register temp_write {
+	width:32;
+	instance_count: 10;
+	
+}
+
+
 action _drop() {
 	drop();
 }
@@ -233,6 +269,22 @@ action lookup_session_map()
 {
 	modify_field_with_hash_based_offset(meta.tcp_session_map_index,0,
 										tcp_session_map_hash, 13);
+
+	modify_field_with_hash_based_offset(meta.dstip_pktcount_map_index,0,
+											dstip_map_hash,13);
+
+	//dstip_pktcount_map_index : 13;
+	
+	register_read(meta.dstip_pktcount,
+				 dstip_pktcount, meta.dstip_pktcount_map_index);
+
+	
+	add_to_field(meta.dstip_pktcount,  1);
+
+	register_write(dstip_pktcount,
+				   meta.dstip_pktcount_map_index,
+					meta.dstip_pktcount);
+	
 	register_read(meta.tcp_session_is_SYN,
 				  tcp_session_is_SYN, meta.tcp_session_map_index);
 	
@@ -277,6 +329,7 @@ action setsyn_ack(port)
 {
 	modify_field(tcp.syn,1);
 	modify_field(tcp.ack,1);
+	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
 
 }
@@ -284,6 +337,7 @@ action setack(port)
 {
 	modify_field(tcp.syn,0);
 	modify_field(tcp.ack,1);
+	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
 }
 
