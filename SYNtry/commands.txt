@@ -4,5 +4,5 @@ table_set_default session_init_table init_session
 table_set_default session_complete_table complete_session
 
 
-table_add forward_table setsyn_ack 1 => 2
-table_add forward_table setack     2 => 2
+table_add forward_table sendback_sa                     1 => 
+table_add forward_table sendback_session_construct      2 => 

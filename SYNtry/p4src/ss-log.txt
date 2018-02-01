@@ -5433,3 +5433,1171 @@ Action entry: setack - 2,
 [16:58:05.204] [bmv2] [D] [thread 7656] [19.0] [cxt 0] Dropping packet at the end of ingress
 [16:59:55.222] [bmv2] [T] [thread 7688] bm_register_read
 [16:59:57.128] [bmv2] [T] [thread 7688] bm_register_read
+[20:44:39.613] [bmv2] [D] [thread 11020] Adding interface veth2 as port 0
+[20:44:39.615] [bmv2] [E] [thread 11020] Add port operation failed
+[20:44:39.615] [bmv2] [D] [thread 11020] Adding interface veth4 as port 1
+[20:44:39.618] [bmv2] [E] [thread 11020] Add port operation failed
+[20:44:39.618] [bmv2] [D] [thread 11020] Adding interface veth6 as port 2
+[20:44:39.620] [bmv2] [E] [thread 11020] Add port operation failed
+[20:45:01.246] [bmv2] [T] [thread 11066] bm_get_config
+[20:45:01.248] [bmv2] [T] [thread 11066] bm_set_default_action
+[20:45:01.248] [bmv2] [D] [thread 11066] Set default entry for table 'forward_table': _drop - 
+[20:45:01.249] [bmv2] [T] [thread 11066] bm_set_default_action
+[20:45:01.249] [bmv2] [D] [thread 11066] Set default entry for table 'session_check': lookup_session_map - 
+[20:45:01.249] [bmv2] [T] [thread 11066] bm_set_default_action
+[20:45:01.249] [bmv2] [D] [thread 11066] Set default entry for table 'session_init_table': init_session - 
+[20:45:01.249] [bmv2] [T] [thread 11066] bm_set_default_action
+[20:45:01.249] [bmv2] [D] [thread 11066] Set default entry for table 'session_complete_table': complete_session - 
+[20:45:01.250] [bmv2] [T] [thread 11066] bm_set_default_action
+[20:45:01.250] [bmv2] [D] [thread 11066] Set default entry for table 'session_complete_table': complete_session - 
+[20:45:01.250] [bmv2] [T] [thread 11066] bm_set_default_action
+[20:45:01.250] [bmv2] [D] [thread 11066] Set default entry for table 'session_complete_table': complete_session - 
+[20:45:01.250] [bmv2] [T] [thread 11066] bm_table_add_entry
+[20:45:01.250] [bmv2] [D] [thread 11066] Entry 0 added to table 'forward_table'
+[20:45:01.251] [bmv2] [D] [thread 11066] Dumping entry 0
+Match key:
+* meta.reply_type     : EXACT     01
+Action entry: sendback_sa - 
+
+[20:45:01.251] [bmv2] [T] [thread 11066] bm_table_add_entry
+[20:45:01.251] [bmv2] [D] [thread 11066] Entry 1 added to table 'forward_table'
+[20:45:01.251] [bmv2] [D] [thread 11066] Dumping entry 1
+Match key:
+* meta.reply_type     : EXACT     02
+Action entry: sendback_session_construct - 
+
+[20:45:05.946] [bmv2] [T] [thread 11068] bm_get_config
+[20:45:11.063] [bmv2] [T] [thread 11068] bm_dev_mgr_show_ports
+[20:46:05.757] [bmv2] [T] [thread 11068] bm_dev_mgr_show_ports
+[20:46:30.827] [bmv2] [T] [thread 11087] bm_get_config
+[20:46:34.340] [bmv2] [T] [thread 11087] bm_dev_mgr_show_ports
+[20:49:14.597] [bmv2] [T] [thread 11087] bm_dev_mgr_show_ports
+[20:49:31.845] [bmv2] [D] [thread 11557] Adding interface veth2 as port 0
+[20:49:31.931] [bmv2] [D] [thread 11557] Adding interface veth4 as port 1
+[20:49:31.971] [bmv2] [D] [thread 11557] Adding interface veth6 as port 2
+[20:49:38.219] [bmv2] [T] [thread 11570] bm_get_config
+[20:49:49.325] [bmv2] [T] [thread 11570] bm_dev_mgr_show_ports
+[20:51:28.230] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Processing packet received on port 0
+[20:51:28.231] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser 'parser': start
+[20:51:28.231] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:51:28.232] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:51:28.232] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:51:28.232] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Bytes parsed: 0
+[20:51:28.232] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:51:28.232] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Extracting header 'ethernet'
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:51:28.233] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Bytes parsed: 14
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Extracting header 'ipv4'
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:51:28.233] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Bytes parsed: 34
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Extracting header 'tcp'
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:51:28.233] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Bytes parsed: 54
+[20:51:28.233] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Parser 'parser': end
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Pipeline 'ingress': start
+[20:51:28.234] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Applying table 'session_check'
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Looking up key:
+
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Table 'session_check': miss
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Action entry is NULL
+[20:51:28.234] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:51:28.234] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Condition "_condition_1" (_condition_1) is true
+[20:51:28.234] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Applying table 'session_init_table'
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Looking up key:
+
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Table 'session_init_table': miss
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Action entry is NULL
+[20:51:28.234] [bmv2] [T] [thread 11563] [0.0] [cxt 0] Applying table 'forward_table'
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Table 'forward_table': miss
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Action entry is NULL
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Pipeline 'ingress': end
+[20:51:28.234] [bmv2] [D] [thread 11563] [0.0] [cxt 0] Egress port is 0
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Pipeline 'egress': start
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Pipeline 'egress': end
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Deparser 'deparser': start
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Updating checksum 'ipv4.hdrChecksum|ipv4_checksum'
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Updating checksum 'tcp.checksum|tcp_checksum'
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Deparsing header 'ethernet'
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Deparsing header 'ipv4'
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Deparsing header 'tcp'
+[20:51:28.235] [bmv2] [D] [thread 11564] [0.0] [cxt 0] Deparser 'deparser': end
+[20:51:28.235] [bmv2] [D] [thread 11568] [0.0] [cxt 0] Transmitting packet of size 56 out of port 0
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Processing packet received on port 0
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser 'parser': start
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:52:24.651] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Bytes parsed: 0
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Extracting header 'ethernet'
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:52:24.651] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Bytes parsed: 14
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Extracting header 'ipv4'
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:52:24.651] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:52:24.652] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Bytes parsed: 34
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Extracting header 'tcp'
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:52:24.652] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Bytes parsed: 54
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Parser 'parser': end
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Pipeline 'ingress': start
+[20:52:24.652] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Applying table 'session_check'
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Looking up key:
+
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Table 'session_check': miss
+[20:52:24.652] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Action entry is NULL
+[20:52:24.652] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:52:24.652] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Condition "_condition_1" (_condition_1) is true
+[20:52:24.652] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Applying table 'session_init_table'
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Looking up key:
+
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Table 'session_init_table': miss
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Action entry is NULL
+[20:52:24.653] [bmv2] [T] [thread 11563] [1.0] [cxt 0] Applying table 'forward_table'
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Table 'forward_table': miss
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Action entry is NULL
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Pipeline 'ingress': end
+[20:52:24.653] [bmv2] [D] [thread 11563] [1.0] [cxt 0] Egress port is 0
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Pipeline 'egress': start
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Pipeline 'egress': end
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Deparser 'deparser': start
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Updating checksum 'ipv4.hdrChecksum|ipv4_checksum'
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Updating checksum 'tcp.checksum|tcp_checksum'
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Deparsing header 'ethernet'
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Deparsing header 'ipv4'
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Deparsing header 'tcp'
+[20:52:24.653] [bmv2] [D] [thread 11564] [1.0] [cxt 0] Deparser 'deparser': end
+[20:52:24.653] [bmv2] [D] [thread 11568] [1.0] [cxt 0] Transmitting packet of size 56 out of port 0
+[20:52:31.583] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Processing packet received on port 0
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser 'parser': start
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Bytes parsed: 0
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Extracting header 'ethernet'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Bytes parsed: 14
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Extracting header 'ipv4'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Bytes parsed: 34
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Extracting header 'tcp'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Bytes parsed: 54
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Parser 'parser': end
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Pipeline 'ingress': start
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Applying table 'session_check'
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Looking up key:
+
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Table 'session_check': miss
+[20:52:31.584] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Action entry is NULL
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:52:31.584] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Condition "_condition_1" (_condition_1) is true
+[20:52:31.585] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Applying table 'session_init_table'
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Looking up key:
+
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Table 'session_init_table': miss
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Action entry is NULL
+[20:52:31.585] [bmv2] [T] [thread 11563] [2.0] [cxt 0] Applying table 'forward_table'
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Table 'forward_table': miss
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Action entry is NULL
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Pipeline 'ingress': end
+[20:52:31.585] [bmv2] [D] [thread 11563] [2.0] [cxt 0] Egress port is 0
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Pipeline 'egress': start
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Pipeline 'egress': end
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Deparser 'deparser': start
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Updating checksum 'ipv4.hdrChecksum|ipv4_checksum'
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Updating checksum 'tcp.checksum|tcp_checksum'
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Deparsing header 'ethernet'
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Deparsing header 'ipv4'
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Deparsing header 'tcp'
+[20:52:31.585] [bmv2] [D] [thread 11564] [2.0] [cxt 0] Deparser 'deparser': end
+[20:52:31.585] [bmv2] [D] [thread 11568] [2.0] [cxt 0] Transmitting packet of size 56 out of port 0
+[20:52:47.160] [bmv2] [T] [thread 11570] bm_register_read
+[20:52:51.663] [bmv2] [T] [thread 11570] bm_register_read
+[20:52:54.457] [bmv2] [T] [thread 11570] bm_register_read
+[20:54:31.767] [bmv2] [T] [thread 11570] bm_mt_get_entries
+[20:54:31.767] [bmv2] [T] [thread 11570] bm_mt_get_default_entry
+[20:55:39.034] [bmv2] [T] [thread 11570] bm_set_default_action
+[20:55:39.034] [bmv2] [D] [thread 11570] Set default entry for table 'forward_table': _drop - 
+[20:57:01.464] [bmv2] [T] [thread 11570] bm_set_default_action
+[20:57:01.464] [bmv2] [D] [thread 11570] Set default entry for table 'session_check': lookup_session_map - 
+[20:57:14.752] [bmv2] [T] [thread 11570] bm_set_default_action
+[20:57:14.752] [bmv2] [D] [thread 11570] Set default entry for table 'session_init_table': init_session - 
+[20:57:37.779] [bmv2] [T] [thread 11687] bm_get_config
+[20:57:37.781] [bmv2] [T] [thread 11687] bm_set_default_action
+[20:57:37.781] [bmv2] [D] [thread 11687] Set default entry for table 'forward_table': _drop - 
+[20:57:37.782] [bmv2] [T] [thread 11687] bm_set_default_action
+[20:57:37.782] [bmv2] [D] [thread 11687] Set default entry for table 'session_check': lookup_session_map - 
+[20:57:37.782] [bmv2] [T] [thread 11687] bm_set_default_action
+[20:57:37.782] [bmv2] [D] [thread 11687] Set default entry for table 'session_init_table': init_session - 
+[20:57:37.782] [bmv2] [T] [thread 11687] bm_set_default_action
+[20:57:37.783] [bmv2] [D] [thread 11687] Set default entry for table 'session_complete_table': complete_session - 
+[20:57:37.783] [bmv2] [T] [thread 11687] bm_set_default_action
+[20:57:37.783] [bmv2] [D] [thread 11687] Set default entry for table 'session_complete_table': complete_session - 
+[20:57:37.783] [bmv2] [T] [thread 11687] bm_set_default_action
+[20:57:37.783] [bmv2] [D] [thread 11687] Set default entry for table 'session_complete_table': complete_session - 
+[20:57:37.784] [bmv2] [T] [thread 11687] bm_table_add_entry
+[20:57:37.784] [bmv2] [D] [thread 11687] Entry 0 added to table 'forward_table'
+[20:57:37.784] [bmv2] [D] [thread 11687] Dumping entry 0
+Match key:
+* meta.reply_type     : EXACT     01
+Action entry: sendback_sa - 
+
+[20:57:37.785] [bmv2] [T] [thread 11687] bm_table_add_entry
+[20:57:37.785] [bmv2] [D] [thread 11687] Entry 1 added to table 'forward_table'
+[20:57:37.785] [bmv2] [D] [thread 11687] Dumping entry 1
+Match key:
+* meta.reply_type     : EXACT     02
+Action entry: sendback_session_construct - 
+
+[20:57:41.883] [bmv2] [T] [thread 11689] bm_get_config
+[20:58:01.227] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Processing packet received on port 0
+[20:58:01.227] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser 'parser': start
+[20:58:01.227] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:01.227] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Bytes parsed: 0
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Extracting header 'ethernet'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Bytes parsed: 14
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Extracting header 'ipv4'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Bytes parsed: 34
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Extracting header 'tcp'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Bytes parsed: 54
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Parser 'parser': end
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Pipeline 'ingress': start
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Applying table 'session_check'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Looking up key:
+
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Table 'session_check': miss
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Action lookup_session_map
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Condition "_condition_1" (_condition_1) is true
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Applying table 'session_init_table'
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Looking up key:
+
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Table 'session_init_table': miss
+[20:58:01.228] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Action entry is init_session - 
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Action init_session
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.228] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Applying table 'forward_table'
+[20:58:01.229] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Looking up key:
+* meta.reply_type     : 01
+
+[20:58:01.229] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Table 'forward_table': hit with handle 0
+[20:58:01.229] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Dumping entry 0
+Match key:
+* meta.reply_type     : EXACT     01
+Action entry: sendback_sa - 
+
+[20:58:01.229] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Action entry is sendback_sa - 
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Action sendback_sa
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.229] [bmv2] [T] [thread 11563] [3.0] [cxt 0] Primitive (no source info)
+[20:58:01.229] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Pipeline 'ingress': end
+[20:58:01.229] [bmv2] [D] [thread 11563] [3.0] [cxt 0] Egress port is 0
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Pipeline 'egress': start
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Pipeline 'egress': end
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Deparser 'deparser': start
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Updating checksum 'ipv4.hdrChecksum|ipv4_checksum'
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Updating checksum 'tcp.checksum|tcp_checksum'
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Deparsing header 'ethernet'
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Deparsing header 'ipv4'
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Deparsing header 'tcp'
+[20:58:01.229] [bmv2] [D] [thread 11564] [3.0] [cxt 0] Deparser 'deparser': end
+[20:58:01.229] [bmv2] [D] [thread 11568] [3.0] [cxt 0] Transmitting packet of size 56 out of port 0
+[20:58:14.765] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Processing packet received on port 0
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser 'parser': start
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Bytes parsed: 0
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Extracting header 'ethernet'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Bytes parsed: 14
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Extracting header 'ipv4'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Bytes parsed: 34
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Extracting header 'tcp'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Bytes parsed: 54
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Parser 'parser': end
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Pipeline 'ingress': start
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Applying table 'session_check'
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Looking up key:
+
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Table 'session_check': miss
+[20:58:14.766] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Action lookup_session_map
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.766] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Applying table 'forward_table'
+[20:58:14.767] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:14.767] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Table 'forward_table': miss
+[20:58:14.767] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Action entry is _drop - 
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Action _drop
+[20:58:14.767] [bmv2] [T] [thread 11563] [4.0] [cxt 0] Primitive (no source info)
+[20:58:14.767] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Pipeline 'ingress': end
+[20:58:14.767] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Egress port is 511
+[20:58:14.767] [bmv2] [D] [thread 11563] [4.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Processing packet received on port 0
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser 'parser': start
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:18.321] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Bytes parsed: 0
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Extracting header 'ethernet'
+[20:58:18.321] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:18.322] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Bytes parsed: 14
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Extracting header 'ipv4'
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:18.322] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Bytes parsed: 34
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Extracting header 'tcp'
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:18.322] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Bytes parsed: 54
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Parser 'parser': end
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Pipeline 'ingress': start
+[20:58:18.322] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Applying table 'session_check'
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Looking up key:
+
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Table 'session_check': miss
+[20:58:18.322] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:18.322] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Action lookup_session_map
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Applying table 'forward_table'
+[20:58:18.323] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:18.323] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Table 'forward_table': miss
+[20:58:18.323] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Action entry is _drop - 
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Action _drop
+[20:58:18.323] [bmv2] [T] [thread 11563] [5.0] [cxt 0] Primitive (no source info)
+[20:58:18.323] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Pipeline 'ingress': end
+[20:58:18.323] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Egress port is 511
+[20:58:18.323] [bmv2] [D] [thread 11563] [5.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Processing packet received on port 0
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser 'parser': start
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:19.136] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Bytes parsed: 0
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:19.136] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Extracting header 'ethernet'
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Bytes parsed: 14
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Extracting header 'ipv4'
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Bytes parsed: 34
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Extracting header 'tcp'
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Bytes parsed: 54
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Parser 'parser': end
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Pipeline 'ingress': start
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Applying table 'session_check'
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Looking up key:
+
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Table 'session_check': miss
+[20:58:19.137] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Action lookup_session_map
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:19.137] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Applying table 'forward_table'
+[20:58:19.138] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:19.138] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Table 'forward_table': miss
+[20:58:19.138] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Action entry is _drop - 
+[20:58:19.138] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Action _drop
+[20:58:19.138] [bmv2] [T] [thread 11563] [6.0] [cxt 0] Primitive (no source info)
+[20:58:19.138] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Pipeline 'ingress': end
+[20:58:19.138] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Egress port is 511
+[20:58:19.138] [bmv2] [D] [thread 11563] [6.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Processing packet received on port 0
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser 'parser': start
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:19.824] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Bytes parsed: 0
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Extracting header 'ethernet'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:19.824] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Bytes parsed: 14
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Extracting header 'ipv4'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:19.824] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Bytes parsed: 34
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Extracting header 'tcp'
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:19.824] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Bytes parsed: 54
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Parser 'parser': end
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Pipeline 'ingress': start
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Applying table 'session_check'
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Looking up key:
+
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Table 'session_check': miss
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Action lookup_session_map
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Applying table 'forward_table'
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Table 'forward_table': miss
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Action entry is _drop - 
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Action _drop
+[20:58:19.825] [bmv2] [T] [thread 11563] [7.0] [cxt 0] Primitive (no source info)
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Pipeline 'ingress': end
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Egress port is 511
+[20:58:19.825] [bmv2] [D] [thread 11563] [7.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Processing packet received on port 0
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser 'parser': start
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Bytes parsed: 0
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Extracting header 'ethernet'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Bytes parsed: 14
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Extracting header 'ipv4'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Bytes parsed: 34
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Extracting header 'tcp'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Bytes parsed: 54
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Parser 'parser': end
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Pipeline 'ingress': start
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Applying table 'session_check'
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Looking up key:
+
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Table 'session_check': miss
+[20:58:20.504] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Action lookup_session_map
+[20:58:20.504] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Applying table 'forward_table'
+[20:58:20.505] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:20.505] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Table 'forward_table': miss
+[20:58:20.505] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Action entry is _drop - 
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Action _drop
+[20:58:20.505] [bmv2] [T] [thread 11563] [8.0] [cxt 0] Primitive (no source info)
+[20:58:20.505] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Pipeline 'ingress': end
+[20:58:20.505] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Egress port is 511
+[20:58:20.505] [bmv2] [D] [thread 11563] [8.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Processing packet received on port 0
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser 'parser': start
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:20.928] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Bytes parsed: 0
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Extracting header 'ethernet'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:20.928] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Bytes parsed: 14
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Extracting header 'ipv4'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:20.928] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Bytes parsed: 34
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Extracting header 'tcp'
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:20.928] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Bytes parsed: 54
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Parser 'parser': end
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Pipeline 'ingress': start
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Applying table 'session_check'
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Looking up key:
+
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Table 'session_check': miss
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Action lookup_session_map
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Applying table 'forward_table'
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Table 'forward_table': miss
+[20:58:20.929] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Action entry is _drop - 
+[20:58:20.929] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Action _drop
+[20:58:20.930] [bmv2] [T] [thread 11563] [9.0] [cxt 0] Primitive (no source info)
+[20:58:20.930] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Pipeline 'ingress': end
+[20:58:20.930] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Egress port is 511
+[20:58:20.930] [bmv2] [D] [thread 11563] [9.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Processing packet received on port 0
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser 'parser': start
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:21.343] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Bytes parsed: 0
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Extracting header 'ethernet'
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:21.343] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Bytes parsed: 14
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Extracting header 'ipv4'
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:21.343] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:21.344] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Bytes parsed: 34
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Extracting header 'tcp'
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:21.344] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Bytes parsed: 54
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Parser 'parser': end
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Pipeline 'ingress': start
+[20:58:21.344] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Applying table 'session_check'
+[20:58:21.344] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Looking up key:
+
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Table 'session_check': miss
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Action lookup_session_map
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Applying table 'forward_table'
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Table 'forward_table': miss
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Action entry is _drop - 
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Action _drop
+[20:58:21.345] [bmv2] [T] [thread 11563] [10.0] [cxt 0] Primitive (no source info)
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Pipeline 'ingress': end
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Egress port is 511
+[20:58:21.345] [bmv2] [D] [thread 11563] [10.0] [cxt 0] Dropping packet at the end of ingress
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Processing packet received on port 0
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser 'parser': start
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser 'parser' entering state 'start'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (0)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[20:58:21.772] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Bytes parsed: 0
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Extracting header 'ethernet'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[20:58:21.772] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Bytes parsed: 14
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Extracting header 'ipv4'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[20:58:21.772] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Bytes parsed: 34
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Extracting header 'tcp'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[20:58:21.772] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Bytes parsed: 54
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Parser 'parser': end
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Pipeline 'ingress': start
+[20:58:21.772] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Applying table 'session_check'
+[20:58:21.772] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Looking up key:
+
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Table 'session_check': miss
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Action entry is lookup_session_map - 
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Action lookup_session_map
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Applying table 'forward_table'
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Table 'forward_table': miss
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Action entry is _drop - 
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Action _drop
+[20:58:21.773] [bmv2] [T] [thread 11563] [11.0] [cxt 0] Primitive (no source info)
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Pipeline 'ingress': end
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Egress port is 511
+[20:58:21.773] [bmv2] [D] [thread 11563] [11.0] [cxt 0] Dropping packet at the end of ingress
+[20:59:16.319] [bmv2] [T] [thread 11689] bm_register_read
+[21:00:50.028] [bmv2] [T] [thread 11689] bm_register_read
+[21:00:52.981] [bmv2] [T] [thread 11689] bm_register_read
+[21:00:54.177] [bmv2] [T] [thread 11689] bm_register_read
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Processing packet received on port 1
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser 'parser': start
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (1)
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[21:01:19.284] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Bytes parsed: 0
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Extracting header 'ethernet'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[21:01:19.284] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Bytes parsed: 14
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Extracting header 'ipv4'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[21:01:19.284] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Bytes parsed: 34
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Extracting header 'tcp'
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[21:01:19.284] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Bytes parsed: 54
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Parser 'parser': end
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Pipeline 'ingress': start
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Applying table 'session_check'
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Looking up key:
+
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Table 'session_check': miss
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Action entry is lookup_session_map - 
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Action lookup_session_map
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Condition "_condition_1" (_condition_1) is false
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Applying table 'forward_table'
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Table 'forward_table': miss
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Action entry is _drop - 
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Action _drop
+[21:01:19.285] [bmv2] [T] [thread 11563] [12.0] [cxt 0] Primitive (no source info)
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Pipeline 'ingress': end
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Egress port is 511
+[21:01:19.285] [bmv2] [D] [thread 11563] [12.0] [cxt 0] Dropping packet at the end of ingress
+[21:01:29.879] [bmv2] [T] [thread 11689] bm_register_read
+[21:02:05.271] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Processing packet received on port 1
+[21:02:05.271] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser 'parser': start
+[21:02:05.271] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:02:05.271] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (1)
+[21:02:05.271] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[21:02:05.271] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Bytes parsed: 0
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Extracting header 'ethernet'
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[21:02:05.272] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Bytes parsed: 14
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Extracting header 'ipv4'
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[21:02:05.272] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Bytes parsed: 34
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Extracting header 'tcp'
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5792)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (0)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (1)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[21:02:05.272] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Bytes parsed: 54
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Parser 'parser': end
+[21:02:05.272] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Pipeline 'ingress': start
+[21:02:05.272] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Applying table 'session_check'
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Looking up key:
+
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Table 'session_check': miss
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Action entry is lookup_session_map - 
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Action lookup_session_map
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Condition "_condition_0" (_condition_0) is true
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Condition "_condition_1" (_condition_1) is true
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Applying table 'session_init_table'
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Looking up key:
+
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Table 'session_init_table': miss
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Action entry is init_session - 
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Action init_session
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Applying table 'forward_table'
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Looking up key:
+* meta.reply_type     : 01
+
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Table 'forward_table': hit with handle 0
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Dumping entry 0
+Match key:
+* meta.reply_type     : EXACT     01
+Action entry: sendback_sa - 
+
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Action entry is sendback_sa - 
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Action sendback_sa
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [T] [thread 11563] [13.0] [cxt 0] Primitive (no source info)
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Pipeline 'ingress': end
+[21:02:05.273] [bmv2] [D] [thread 11563] [13.0] [cxt 0] Egress port is 1
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Pipeline 'egress': start
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Pipeline 'egress': end
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Deparser 'deparser': start
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Updating checksum 'ipv4.hdrChecksum|ipv4_checksum'
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Updating checksum 'tcp.checksum|tcp_checksum'
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Deparsing header 'ethernet'
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Deparsing header 'ipv4'
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Deparsing header 'tcp'
+[21:02:05.274] [bmv2] [D] [thread 11565] [13.0] [cxt 0] Deparser 'deparser': end
+[21:02:05.274] [bmv2] [D] [thread 11568] [13.0] [cxt 0] Transmitting packet of size 56 out of port 1
+[21:02:22.278] [bmv2] [T] [thread 11689] bm_register_read
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Processing packet received on port 1
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser 'parser': start
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (1)
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[21:02:49.300] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Bytes parsed: 0
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Extracting header 'ethernet'
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[21:02:49.300] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Bytes parsed: 14
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Extracting header 'ipv4'
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[21:02:49.300] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Bytes parsed: 34
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[21:02:49.300] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Extracting header 'tcp'
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5791)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (1)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (0)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Bytes parsed: 54
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Parser 'parser': end
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Pipeline 'ingress': start
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Applying table 'session_check'
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Looking up key:
+
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Table 'session_check': miss
+[21:02:49.301] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Action entry is lookup_session_map - 
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Action lookup_session_map
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.301] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.302] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Condition "_condition_0" (_condition_0) is false
+[21:02:49.302] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Condition "_condition_2" (_condition_2) is true
+[21:02:49.302] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Condition "_condition_3" (_condition_3) is false
+[21:02:49.302] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Applying table 'forward_table'
+[21:02:49.302] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[21:02:49.302] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Table 'forward_table': miss
+[21:02:49.302] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Action entry is _drop - 
+[21:02:49.302] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Action _drop
+[21:02:49.302] [bmv2] [T] [thread 11563] [14.0] [cxt 0] Primitive (no source info)
+[21:02:49.302] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Pipeline 'ingress': end
+[21:02:49.302] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Egress port is 511
+[21:02:49.302] [bmv2] [D] [thread 11563] [14.0] [cxt 0] Dropping packet at the end of ingress
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Processing packet received on port 1
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser 'parser': start
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (1)
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[21:03:46.744] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Bytes parsed: 0
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Extracting header 'ethernet'
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[21:03:46.744] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Bytes parsed: 14
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Extracting header 'ipv4'
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[21:03:46.744] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Bytes parsed: 34
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[21:03:46.744] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Extracting header 'tcp'
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (1)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (0)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Bytes parsed: 54
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Parser 'parser': end
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Pipeline 'ingress': start
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Applying table 'session_check'
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Looking up key:
+
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Table 'session_check': miss
+[21:03:46.745] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Action entry is lookup_session_map - 
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Action lookup_session_map
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.745] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Condition "_condition_0" (_condition_0) is false
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Condition "_condition_2" (_condition_2) is true
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Condition "_condition_3" (_condition_3) is true
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Applying table 'session_complete_table'
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Looking up key:
+
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Table 'session_complete_table': miss
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Action entry is complete_session - 
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Action complete_session
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Applying table 'forward_table'
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Looking up key:
+* meta.reply_type     : 02
+
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Table 'forward_table': hit with handle 1
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Dumping entry 1
+Match key:
+* meta.reply_type     : EXACT     02
+Action entry: sendback_session_construct - 
+
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Action entry is sendback_session_construct - 
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Action sendback_session_construct
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [T] [thread 11563] [15.0] [cxt 0] Primitive (no source info)
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Pipeline 'ingress': end
+[21:03:46.746] [bmv2] [D] [thread 11563] [15.0] [cxt 0] Egress port is 1
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Pipeline 'egress': start
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Pipeline 'egress': end
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Deparser 'deparser': start
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Updating checksum 'ipv4.hdrChecksum|ipv4_checksum'
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Updating checksum 'tcp.checksum|tcp_checksum'
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Deparsing header 'ethernet'
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Deparsing header 'ipv4'
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Deparsing header 'tcp'
+[21:03:46.746] [bmv2] [D] [thread 11565] [15.0] [cxt 0] Deparser 'deparser': end
+[21:03:46.747] [bmv2] [D] [thread 11568] [15.0] [cxt 0] Transmitting packet of size 56 out of port 1
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Processing packet received on port 1
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser 'parser': start
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.in_port' from field 'standard_metadata.ingress_port' (1)
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[21:03:57.052] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Bytes parsed: 0
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Extracting header 'ethernet'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[21:03:57.052] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Bytes parsed: 14
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Extracting header 'ipv4'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.ipv4_sa' from field 'ipv4.srcAddr' (3232256139)
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.ipv4_da' from field 'ipv4.dstAddr' (3232235530)
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcpLength' from expression, new value is 22
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[21:03:57.052] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Bytes parsed: 34
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Extracting header 'tcp'
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_sp' from field 'tcp.srcPort' (5793)
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_dp' from field 'tcp.dstPort' (80)
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_ack' from field 'tcp.ack' (1)
+[21:03:57.052] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_psh' from field 'tcp.psh' (0)
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_rst' from field 'tcp.rst' (0)
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_syn' from field 'tcp.syn' (0)
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser set: setting field 'meta.tcp_fin' from field 'tcp.fin' (0)
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser state 'parse_tcp' has no switch, going to default next state
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Bytes parsed: 54
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Verifying checksum 'ipv4.hdrChecksum|ipv4_checksum': true
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Verifying checksum 'tcp.checksum|tcp_checksum': true
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Parser 'parser': end
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Pipeline 'ingress': start
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Applying table 'session_check'
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Looking up key:
+
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Table 'session_check': miss
+[21:03:57.053] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Action entry is lookup_session_map - 
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Action lookup_session_map
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.053] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Condition "_condition_0" (_condition_0) is false
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Condition "_condition_2" (_condition_2) is true
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Condition "_condition_3" (_condition_3) is false
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Applying table 'forward_table'
+[21:03:57.054] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Looking up key:
+* meta.reply_type     : 00
+
+[21:03:57.054] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Table 'forward_table': miss
+[21:03:57.054] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Action entry is _drop - 
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Action _drop
+[21:03:57.054] [bmv2] [T] [thread 11563] [16.0] [cxt 0] Primitive (no source info)
+[21:03:57.054] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Pipeline 'ingress': end
+[21:03:57.054] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Egress port is 511
+[21:03:57.054] [bmv2] [D] [thread 11563] [16.0] [cxt 0] Dropping packet at the end of ingress

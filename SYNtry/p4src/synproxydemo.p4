@@ -26,6 +26,10 @@ header_type ipv4_t {
 parser start {
 	
 	set_metadata(meta.in_port, standard_metadata.ingress_port);
+
+	//register_write(temp_write,
+	//		   0,
+	//		   meta.in_port);
 	return  parse_ethernet;
 	
 }
@@ -333,6 +337,29 @@ action setsyn_ack(port)
 	modify_field(standard_metadata.egress_spec, port);
 
 }
+action sendback_sa()
+{
+	modify_field(tcp.syn,1);
+	modify_field(tcp.ack,1);
+	modify_field(tcp.seqNo, meta.dstip_pktcount);
+	
+	register_write(temp_write,
+			   1,
+			   meta.in_port);
+
+
+	modify_field(standard_metadata.egress_spec, meta.in_port);
+
+}
+
+action sendback_session_construct()
+{
+	modify_field(tcp.fin,1);
+	modify_field(standard_metadata.egress_spec, meta.in_port);
+
+}
+
+
 action setack(port)
 {
 	modify_field(tcp.syn,0);
@@ -349,6 +376,9 @@ table forward_table{
 	actions{
 		setsyn_ack;
 		setack;
+		sendback_sa;
+		sendback_session_construct;
+
 		_drop;
 	
 	}
