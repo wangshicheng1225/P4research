@@ -1,6 +1,4 @@
-ion_complete_table);
-		}
-	}
+
 
 header_type ethernet_t {
 	fields {
