@@ -1,3 +1,6 @@
+ion_complete_table);
+		}
+	}
 
 header_type ethernet_t {
 	fields {
@@ -288,7 +291,13 @@ action lookup_session_map()
 	register_write(dstip_pktcount,
 				   meta.dstip_pktcount_map_index,
 					meta.dstip_pktcount);
-	
+
+	register_write(temp_write,
+			   1,
+			   meta.dstip_pktcount);
+
+
+
 	register_read(meta.tcp_session_is_SYN,
 				  tcp_session_is_SYN, meta.tcp_session_map_index);
 	
@@ -395,7 +404,7 @@ table forward_table{
 
 control ingress {
 	apply(session_check);
-	if (meta.tcp_syn == 1 )
+	if (meta.tcp_syn == 1 and meta.dstip_pktcount < 4 )
 	{
 		if (meta.tcp_session_is_SYN==0 and meta.tcp_session_is_ACK==0)
 		{
@@ -403,7 +412,7 @@ control ingress {
 		}
 
 	}
-	else if (meta.tcp_ack==1)
+	else if (meta.tcp_ack==1 and meta.dstip_pktcount < 4) 
 	{
 		if (meta.tcp_session_is_SYN == 1 and meta.tcp_session_is_ACK == 0)
 		{
