@@ -24,7 +24,7 @@ SWITCH_PATH=$BMV2_PATH/targets/simple_switch/simple_switch
 
 CLI_PATH=$BMV2_PATH/tools/runtime_CLI.py
 
-TARGET=synproxydemo
+TARGET=ping_switch
 TARGET_SRC=$TARGET.p4
 TARGET_JSON=$TARGET.json
 
@@ -35,4 +35,4 @@ sudo PYTHONPATH=$PYTHONPATH:$BMV2_PATH/mininet/ python topo.py \
     --behavioral-exe $SWITCH_PATH \
     --json $TARGET_JSON \
     --cli $CLI_PATH \
-	--thrift-port 22222
+	--thrift-port 22223

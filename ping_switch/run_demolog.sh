@@ -18,17 +18,13 @@ THIS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 source $THIS_DIR/../../env.sh
 
-P4C_BM_SCRIPT=$P4C_BM_PATH/p4c_bm/__main__.py
+TARGET=ping_switch
+TARGET_SRC=$TARGET.p4
+TARGET_JSON=$TARGET.json
 
-SWITCH_PATH=$BMV2_PATH/targets/simple_switch/simple_switch
+p4c-bm2-ss -o $TARGET_JSON --p4v 14 ./p4src/$TARGET_SRC
 
-CLI_PATH=$BMV2_PATH/tools/runtime_CLI.py
+sudo simple_switch --log-file ss-log --log-flush -i 0@veth2 -i 1@veth4 -i 2@veth6  $TARGET_JSON
 
-$P4C_BM_SCRIPT p4src/source_routing.p4 --json source_routing.json
-# This gives libtool the opportunity to "warm-up"
-sudo $SWITCH_PATH >/dev/null 2>&1
-sudo PYTHONPATH=$PYTHONPATH:$BMV2_PATH/mininet/ python topo.py \
-    --behavioral-exe $SWITCH_PATH \
-    --json source_routing.json \
-    --cli $CLI_PATH \
-	--thrift-port 22222
+simple_switch_CLI < commands.txt 
+

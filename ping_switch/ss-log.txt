@@ -1,0 +1,89 @@
+[04:08:50.065] [bmv2] [D] [thread 18381] Set default entry for table 'ipv4_lpm_table': NoAction - 
+[04:08:50.066] [bmv2] [D] [thread 18381] Adding interface veth2 as port 0
+[04:08:50.069] [bmv2] [E] [thread 18381] Add port operation failed
+[04:08:50.069] [bmv2] [D] [thread 18381] Adding interface veth4 as port 1
+[04:08:50.071] [bmv2] [E] [thread 18381] Add port operation failed
+[04:08:50.071] [bmv2] [D] [thread 18381] Adding interface veth6 as port 2
+[04:08:50.072] [bmv2] [E] [thread 18381] Add port operation failed
+[04:09:10.859] [bmv2] [T] [thread 18404] bm_get_config
+[04:09:10.861] [bmv2] [T] [thread 18404] bm_set_default_action
+[04:09:10.861] [bmv2] [D] [thread 18404] Set default entry for table 'ipv4_lpm_table': _drop - 
+[04:09:10.861] [bmv2] [T] [thread 18404] bm_set_default_action
+[04:09:10.861] [bmv2] [D] [thread 18404] Set default entry for table 'ipv4_lpm_table': _drop - 
+[04:09:10.862] [bmv2] [T] [thread 18404] bm_table_add_entry
+[04:09:10.862] [bmv2] [D] [thread 18404] Entry 0 added to table 'ipv4_lpm_table'
+[04:09:10.862] [bmv2] [D] [thread 18404] Dumping entry 0
+Match key:
+* ipv4.dstAddr        : LPM       0a00000a/32
+Action entry: ipv4_forward - 400000010,1,
+
+[04:09:10.863] [bmv2] [T] [thread 18404] bm_table_add_entry
+[04:09:10.863] [bmv2] [D] [thread 18404] Entry 1 added to table 'ipv4_lpm_table'
+[04:09:10.863] [bmv2] [D] [thread 18404] Dumping entry 1
+Match key:
+* ipv4.dstAddr        : LPM       c0a8000a/32
+Action entry: ipv4_forward - 500000010,2,
+
+[04:09:55.224] [bmv2] [T] [thread 18420] bm_get_config
+[04:10:09.282] [bmv2] [T] [thread 18420] bm_mt_get_entries
+[04:10:09.283] [bmv2] [T] [thread 18420] bm_mt_get_default_entry
+[04:17:15.306] [bmv2] [D] [thread 18947] Set default entry for table 'ipv4_lpm_table': NoAction - 
+[04:17:15.307] [bmv2] [D] [thread 18947] Adding interface veth2 as port 0
+[04:17:15.350] [bmv2] [D] [thread 18947] Adding interface veth4 as port 1
+[04:17:15.414] [bmv2] [D] [thread 18947] Adding interface veth6 as port 2
+[04:17:20.772] [bmv2] [T] [thread 18961] bm_get_config
+[04:20:22.684] [bmv2] [T] [thread 18961] bm_set_default_action
+[04:20:22.684] [bmv2] [D] [thread 18961] Set default entry for table 'ipv4_lpm_table': _drop - 
+[04:22:50.077] [bmv2] [T] [thread 18961] bm_table_add_entry
+[04:22:50.077] [bmv2] [D] [thread 18961] Entry 0 added to table 'ipv4_lpm_table'
+[04:22:50.077] [bmv2] [D] [thread 18961] Dumping entry 0
+Match key:
+* ipv4.dstAddr        : LPM       c0a8000a/32
+Action entry: ipv4_forward - 500000010,2,
+
+[04:22:55.318] [bmv2] [T] [thread 18961] bm_mt_get_entries
+[04:22:55.319] [bmv2] [T] [thread 18961] bm_mt_get_default_entry
+[04:26:19.486] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Processing packet received on port 0
+[04:26:19.486] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser 'parser': start
+[04:26:19.486] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser 'parser' entering state 'start'
+[04:26:19.486] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser state 'start' has no switch, going to default next state
+[04:26:19.487] [bmv2] [T] [thread 18953] [0.0] [cxt 0] Bytes parsed: 0
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser 'parser' entering state 'parse_ethernet'
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Extracting header 'ethernet'
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser state 'parse_ethernet': key is 0800
+[04:26:19.487] [bmv2] [T] [thread 18953] [0.0] [cxt 0] Bytes parsed: 14
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Extracting header 'ipv4'
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+[04:26:19.487] [bmv2] [T] [thread 18953] [0.0] [cxt 0] Bytes parsed: 34
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Verifying checksum 'cksum': true
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Verifying checksum 'cksum_0': true
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Parser 'parser': end
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Pipeline 'ingress': start
+[04:26:19.487] [bmv2] [T] [thread 18953] [0.0] [cxt 0] Applying table 'ipv4_lpm_table'
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Looking up key:
+* ipv4.dstAddr        : c0a8000a
+
+[04:26:19.487] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Table 'ipv4_lpm_table': hit with handle 0
+[04:26:19.488] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Dumping entry 0
+Match key:
+* ipv4.dstAddr        : LPM       c0a8000a/32
+Action entry: ipv4_forward - 500000010,2,
+
+[04:26:19.488] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Action entry is ipv4_forward - 500000010,2,
+[04:26:19.488] [bmv2] [T] [thread 18953] [0.0] [cxt 0] Action ipv4_forward
+[04:26:19.488] [bmv2] [T] [thread 18953] [0.0] [cxt 0] ./p4src/ping_switch.p4(83) Primitive modify_field(ethernet.srcAddr, ethernet.dstAddr)
+[04:26:19.488] [bmv2] [T] [thread 18953] [0.0] [cxt 0] ./p4src/ping_switch.p4(81) Primitive dstMac, e_port) ...
+[04:26:19.488] [bmv2] [T] [thread 18953] [0.0] [cxt 0] ./p4src/ping_switch.p4(81) Primitive e_port) ...
+[04:26:19.488] [bmv2] [T] [thread 18953] [0.0] [cxt 0] ./p4src/ping_switch.p4(86) Primitive add_to_field(ipv4.ttl, -1)
+[04:26:19.488] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Pipeline 'ingress': end
+[04:26:19.488] [bmv2] [D] [thread 18953] [0.0] [cxt 0] Egress port is 2
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Pipeline 'egress': start
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Pipeline 'egress': end
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Deparser 'deparser': start
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Updating checksum 'cksum'
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Updating checksum 'cksum_0'
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Deparsing header 'ethernet'
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Deparsing header 'ipv4'
+[04:26:19.488] [bmv2] [D] [thread 18956] [0.0] [cxt 0] Deparser 'deparser': end
+[04:26:19.489] [bmv2] [D] [thread 18958] [0.0] [cxt 0] Transmitting packet of size 56 out of port 2

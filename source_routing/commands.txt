@@ -1,7 +1,0 @@
-table_set_default ipv4_da_lpm my_drop
-table_set_default mac_da my_drop
-table_set_default send_frame my_drop
-
-table_add ipv4_da_lpm set_l2ptr 192.168.0.10/32 => 2
-table_add mac_da set_bd_dmac_intf 2 => 2 00:05:00:00:00:10 2
-table_add send_frame rewrite_mac 2 => 00:aa:bb:00:00:05 
