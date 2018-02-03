@@ -46,6 +46,7 @@ parser start {
 }
 
 #define ETHERTYPE_IPV4 0x0800
+#define ETHERTYPE_ARP 0x0806
 
 header ethernet_t ethernet;
 
@@ -95,6 +96,7 @@ parser parse_ipv4 {
 	
 	set_metadata(meta.ipv4_sa, ipv4.srcAddr);
 	set_metadata(meta.ipv4_da, ipv4.dstAddr);
+	set_metadata(meta.ip_proto, ipv4.protocol);
 	set_metadata(meta.tcpLength, ipv4.totalLen - 20);	
 	return select(ipv4.protocol) {
 		IP_PROT_TCP : parse_tcp;
@@ -195,6 +197,7 @@ header_type meta_t {
 	eth_type:16;
         ipv4_sa : 32;
         ipv4_da : 32;
+        ip_proto : 8;
         tcp_sp : 16;
         tcp_dp : 16;
         nhop_ipv4 : 32;
@@ -470,7 +473,7 @@ table forward_table{
  * */
 
 control ingress {
-	if(meta.eth_type != ETHERTYPE_IPV4){
+	if(meta.eth_type == ETHERTYPE_ARP or meta.ip_proto != IP_PROT_TCP){
 		apply(L2_switch_table);
 	} 
 	else if(meta.eth_type == ETHERTYPE_IPV4) 

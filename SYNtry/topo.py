@@ -54,13 +54,13 @@ class MyTopo(Topo):
                                 pcap_dump = True)
 #internal host
         h1 = self.addHost('h1',
-                          ip = "10.0.0.10",
+                          ip = "10.0.0.10/24",
                           mac = "00:04:00:00:00:10")
         self.addLink(h1,switch)
 #external host
         h2 = self.addHost('h2',
-                          ip = "10.0.0.11",
-		   	  mac = "00:aa:bb:00:00:04")
+                          ip = "10.0.0.11/24",
+		   	  mac = "00:05:00:00:00:10")
     
         self.addLink(h2, switch)
                     
@@ -78,14 +78,14 @@ def main():
                   controller = None )
     net.start()
 
-    sw_macs = ["00:aa:bb:00:00:04", "00:aa:bb:00:00:05"]
+    #sw_macs = ["00:aa:bb:00:00:04", "00:aa:bb:00:00:05"]
     
-    sw_addrs = ["10.0.0.1", "10.0.0.2"]
+    #sw_addrs = ["10.0.0.1", "10.0.0.2"]
     
-    for n in xrange(2):
-        h = net.get('h%d' %(n+1))
-        h.setARP(sw_addrs[n], sw_macs[n])
-        h.setDefaultRoute("dev eth0 via %s" % sw_addrs[n])
+    #for n in xrange(2):
+    #   h = net.get('h%d' %(n+1))
+    #   h.setARP(sw_addrs[n], sw_macs[n])
+    ##   h.setDefaultRoute("dev eth0 via %s" % sw_addrs[n])
     
     for n in xrange(2):
         h = net.get('h%d' % (n+1))

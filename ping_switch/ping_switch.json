@@ -227,8 +227,19 @@
     "meter_arrays": [],
     "actions": [
         {
-            "name": "L2_forward",
+            "name": "_drop",
             "id": 0,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "drop",
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "name": "L2_forward",
+            "id": 1,
             "runtime_data": [
                 {
                     "name": "e_port",
@@ -251,17 +262,6 @@
                             "value": 0
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "name": "_drop",
-            "id": 1,
-            "runtime_data": [],
-            "primitives": [
-                {
-                    "op": "drop",
-                    "parameters": []
                 }
             ]
         }
