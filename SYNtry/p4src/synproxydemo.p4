@@ -317,9 +317,6 @@ table session_check {
 action init_session()
 {
 	modify_field(meta.reply_type,3);
-	register_write(temp_write,9,meta.in_port);
-	register_write(temp_write,8,meta.in_port);
-	register_write(temp_write,7,13);
 	register_write(tcp_session_is_SYN, meta.tcp_session_map_index,
 					1);
 	register_write(tcp_session_is_ACK, meta.tcp_session_map_index,0);
@@ -352,9 +349,6 @@ action setsyn_ack(port)
 	modify_field(tcp.ack,1);
 	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
-	register_write(temp_write,5,meta.in_port);
-	register_write(temp_write,4,standard_metadata.egress_spec);
-	register_write(temp_write,3,10);
 
 }
 action sendback_sa()
@@ -372,7 +366,6 @@ action sendback_sa()
 	modify_field(ethernet.dstAddr, meta.eth_sa);
 	modify_field(ethernet.srcAddr, meta.eth_da);
 		
-	register_write(temp_write,8,meta.in_port);
 	modify_field(standard_metadata.egress_spec, meta.in_port);
 
 }
@@ -385,9 +378,11 @@ action sendback_session_construct()
 }
 
 action dump(){
- 	register_write(temp_write,6,standard_metadata.egress_spec);
- 	register_write(temp_write,5,meta.in_port);
- 	register_write(temp_write,4,1);
+	//We can print some msg here to debug.
+
+ 	//register_write(temp_write,6,standard_metadata.egress_spec);
+ 	//register_write(temp_write,5,meta.in_port);
+ 	//register_write(temp_write,4,1);
 }
 
 table dump_table{
@@ -400,7 +395,6 @@ action setack(port)
 	modify_field(tcp.ack,1);
 	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
- 	register_write(temp_write,4,19);
 }
 
 table forward_table{
