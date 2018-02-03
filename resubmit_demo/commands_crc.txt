@@ -1,0 +1,4 @@
+table_set_default write_hash_table _drop
+
+table_add write_hash_table write_hash 1 =>
+table_add write_hash_table write_reverse_hash 2 =>
