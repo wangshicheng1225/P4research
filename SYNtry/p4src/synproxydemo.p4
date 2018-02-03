@@ -24,6 +24,16 @@ header_type ipv4_t {
 	dstAddr: 32;
 	}
 } 
+header_type tcp_options_t {
+    fields {
+	kind : 8;
+	option_length : 8;
+	mss : 16;
+    }
+}
+
+header tcp_options_t tcp_options;
+
 parser start {
 	
 	set_metadata(meta.in_port, standard_metadata.ingress_port);
@@ -43,6 +53,7 @@ parser parse_ethernet {
 	extract(ethernet);
 	set_metadata(meta.eth_da,ethernet.dstAddr);
 	set_metadata(meta.eth_sa,ethernet.srcAddr);
+	set_metadata(meta.eth_type,ethernet.etherType);
 	return select(latest.etherType) {
 		ETHERTYPE_IPV4 : parse_ipv4;
 		default: ingress;
@@ -125,12 +136,12 @@ parser parse_tcp {
 	set_metadata(meta.tcp_syn, tcp.syn);
 	set_metadata(meta.tcp_fin, tcp.fin);	
 	set_metadata(meta.tcp_seq, tcp.seqNo);	
+	extract(tcp_options);
 	return ingress;
 }
 field_list tcp_checksum_list {
         ipv4.srcAddr;
         ipv4.dstAddr;
-        8'0;
         ipv4.protocol;
         meta.tcpLength;
         tcp.srcPort;
@@ -181,6 +192,7 @@ header_type meta_t {
 		do_forward : 1;
 	eth_sa:48;
 	eth_da:48;
+	eth_type:16;
         ipv4_sa : 32;
         ipv4_da : 32;
         tcp_sp : 16;
@@ -255,6 +267,16 @@ register tcp_session_is_ACK {
 	instance_count: 8192;
 }
 
+register h1_seq {
+	width: 32;
+	instance_count: 8192;
+}
+
+register h2_ack {
+	width: 32;
+	instance_count: 8192;
+}
+
 register dstip_pktcount {
 	width : 32; 
 	instance_count: 8192;
@@ -320,6 +342,7 @@ action init_session()
 	register_write(tcp_session_is_SYN, meta.tcp_session_map_index,
 					1);
 	register_write(tcp_session_is_ACK, meta.tcp_session_map_index,0);
+	register_write(h1_seq, meta.tcp_session_map_index,meta.tcp_seq);
 
 }
 
@@ -388,12 +411,36 @@ action dump(){
 table dump_table{
 	actions {dump;}
 }
+action L2_forward(e_port)
+{
+        modify_field(standard_metadata.egress_spec,e_port);
+}
+
+table L2_switch_table
+{
+        reads {
+                meta.in_port:exact;
+
+        }
+        actions {
+                _drop;
+                L2_forward;
+        }
+}
 
 action setack(port)
 {
-	modify_field(tcp.syn,0);
-	modify_field(tcp.ack,1);
-	modify_field(tcp.seqNo, meta.dstip_pktcount);
+	register_read(meta.tcp_seq,h1_seq, meta.tcp_session_map_index);
+	modify_field(ipv4.totalLen,44);
+	modify_field(tcp.syn,1);
+	modify_field(tcp.ack,0);
+	modify_field(tcp.seqNo,meta.tcp_seq);
+	modify_field(tcp.ackNo, 0);
+	modify_field(tcp.dataOffset, 6);
+	add_header(tcp_options);
+	modify_field(tcp_options.mss, 1460);
+	modify_field(tcp_options.kind, 2);
+	modify_field(tcp_options.option_length, 4);
 	modify_field(standard_metadata.egress_spec, port);
 }
 
@@ -423,26 +470,35 @@ table forward_table{
  * */
 
 control ingress {
-	apply(session_check);
-
-	if (meta.tcp_syn == 1 /*and meta.dstip_pktcount < 4 */)
+	if(meta.eth_type != ETHERTYPE_IPV4){
+		apply(L2_switch_table);
+	} 
+	else if(meta.eth_type == ETHERTYPE_IPV4) 
 	{
-		if (meta.tcp_session_is_SYN==0 and meta.tcp_session_is_ACK==0)
+		apply(session_check);
+		if( meta.tcp_syn == 1 and meta.tcp_ack == 1){
+
+		}
+		else if (meta.tcp_syn == 1 /*and meta.dstip_pktcount < 4 */)
 		{
-			apply(session_init_table);	
+			if (meta.tcp_session_is_SYN==0 and meta.tcp_session_is_ACK==0)
+			{
+				apply(session_init_table);
+			}
+
+		}
+		else if (meta.tcp_ack==1 /*and meta.dstip_pktcount < 4*/) 
+		{
+			if (meta.tcp_session_is_SYN == 1 and meta.tcp_session_is_ACK == 0)
+			{
+				apply(session_complete_table);
+			}
 		}
 
+		apply(forward_table);	
 	}
-	else if (meta.tcp_ack==1 /*and meta.dstip_pktcount < 4*/) 
-	{
-		if (meta.tcp_session_is_SYN == 1 and meta.tcp_session_is_ACK == 0)
-		{
-			apply(session_complete_table);
-		}
-	}
-
-	apply(forward_table);	
 }
+
 control egress {
 	apply(dump_table);
 }

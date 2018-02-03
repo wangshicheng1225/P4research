@@ -59,8 +59,9 @@ class MyTopo(Topo):
         self.addLink(h1,switch)
 #external host
         h2 = self.addHost('h2',
-                          ip = "192.168.0.10",
-                          mac = "00:05:00:00:00:10")
+                          ip = "10.0.0.11",
+		   	  mac = "00:aa:bb:00:00:04")
+    
         self.addLink(h2, switch)
                     
 
@@ -79,7 +80,7 @@ def main():
 
     sw_macs = ["00:aa:bb:00:00:04", "00:aa:bb:00:00:05"]
     
-    sw_addrs = ["10.0.0.1", "192.168.0.1"]
+    sw_addrs = ["10.0.0.1", "10.0.0.2"]
     
     for n in xrange(2):
         h = net.get('h%d' %(n+1))
