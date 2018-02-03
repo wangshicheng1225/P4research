@@ -224,6 +224,14 @@
                     1
                 ],
                 [
+                    "eth_sa",
+                    48
+                ],
+                [
+                    "eth_da",
+                    48
+                ],
+                [
                     "ipv4_sa",
                     32
                 ],
@@ -286,6 +294,10 @@
                 [
                     "tcp_fin",
                     1
+                ],
+                [
+                    "tcp_seq",
+                    32
                 ],
                 [
                     "tcp_session_map_index",
@@ -409,6 +421,44 @@
                                 {
                                     "type": "regular",
                                     "value": "ethernet"
+                                }
+                            ]
+                        },
+                        {
+                            "op": "set",
+                            "parameters": [
+                                {
+                                    "type": "field",
+                                    "value": [
+                                        "meta",
+                                        "eth_da"
+                                    ]
+                                },
+                                {
+                                    "type": "field",
+                                    "value": [
+                                        "ethernet",
+                                        "dstAddr"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "op": "set",
+                            "parameters": [
+                                {
+                                    "type": "field",
+                                    "value": [
+                                        "meta",
+                                        "eth_sa"
+                                    ]
+                                },
+                                {
+                                    "type": "field",
+                                    "value": [
+                                        "ethernet",
+                                        "srcAddr"
+                                    ]
                                 }
                             ]
                         }
@@ -690,6 +740,25 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "op": "set",
+                            "parameters": [
+                                {
+                                    "type": "field",
+                                    "value": [
+                                        "meta",
+                                        "tcp_seq"
+                                    ]
+                                },
+                                {
+                                    "type": "field",
+                                    "value": [
+                                        "tcp",
+                                        "seqNo"
+                                    ]
+                                }
+                            ]
                         }
                     ],
                     "transition_key": [],
@@ -720,19 +789,357 @@
     "meter_arrays": [],
     "actions": [
         {
-            "name": "_drop",
+            "name": "sendback_sa",
             "id": 0,
             "runtime_data": [],
             "primitives": [
                 {
-                    "op": "drop",
-                    "parameters": []
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "syn"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "ack"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "seqNo"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x0"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "ackNo"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "tcp_seq"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "add_to_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "ackNo"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "ipv4",
+                                "dstAddr"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "ipv4_sa"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "ipv4",
+                                "srcAddr"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "ipv4_da"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "srcPort"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "tcp_dp"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "dstPort"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "tcp_sp"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "ethernet",
+                                "dstAddr"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "eth_sa"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "ethernet",
+                                "srcAddr"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "eth_da"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x8"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "in_port"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "in_port"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "sendback_session_construct",
+            "id": 1,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "fin"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "in_port"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "dump",
+            "id": 2,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x6"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x5"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "in_port"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x4"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
                 }
             ]
         },
         {
             "name": "complete_session",
-            "id": 1,
+            "id": 3,
             "runtime_data": [],
             "primitives": [
                 {
@@ -794,263 +1201,8 @@
             ]
         },
         {
-            "name": "setsyn_ack",
-            "id": 2,
-            "runtime_data": [
-                {
-                    "name": "port",
-                    "bitwidth": 9
-                }
-            ],
-            "primitives": [
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "syn"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "ack"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "seqNo"
-                            ]
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "dstip_pktcount"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "standard_metadata",
-                                "egress_spec"
-                            ]
-                        },
-                        {
-                            "type": "runtime_data",
-                            "value": 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "setack",
-            "id": 3,
-            "runtime_data": [
-                {
-                    "name": "port",
-                    "bitwidth": 9
-                }
-            ],
-            "primitives": [
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "syn"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x0"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "ack"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "seqNo"
-                            ]
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "dstip_pktcount"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "standard_metadata",
-                                "egress_spec"
-                            ]
-                        },
-                        {
-                            "type": "runtime_data",
-                            "value": 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "sendback_sa",
-            "id": 4,
-            "runtime_data": [],
-            "primitives": [
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "syn"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "ack"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tcp",
-                                "seqNo"
-                            ]
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "dstip_pktcount"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "op": "register_write",
-                    "parameters": [
-                        {
-                            "type": "register_array",
-                            "value": "temp_write"
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "in_port"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "standard_metadata",
-                                "egress_spec"
-                            ]
-                        },
-                        {
-                            "type": "field",
-                            "value": [
-                                "meta",
-                                "in_port"
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "lookup_session_map",
-            "id": 5,
+            "id": 4,
             "runtime_data": [],
             "primitives": [
                 {
@@ -1232,8 +1384,115 @@
             ]
         },
         {
-            "name": "init_session",
+            "name": "setack",
+            "id": 5,
+            "runtime_data": [
+                {
+                    "name": "port",
+                    "bitwidth": 9
+                }
+            ],
+            "primitives": [
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "syn"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x0"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "ack"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "seqNo"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        },
+                        {
+                            "type": "runtime_data",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x4"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x13"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "_drop",
             "id": 6,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "drop",
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "name": "init_session",
+            "id": 7,
             "runtime_data": [],
             "primitives": [
                 {
@@ -1248,7 +1507,64 @@
                         },
                         {
                             "type": "hexstr",
-                            "value": "0x1"
+                            "value": "0x3"
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x9"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "in_port"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x8"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "in_port"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x7"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0xd"
                         }
                     ]
                 },
@@ -1295,9 +1611,14 @@
             ]
         },
         {
-            "name": "sendback_session_construct",
-            "id": 7,
-            "runtime_data": [],
+            "name": "setsyn_ack",
+            "id": 8,
+            "runtime_data": [
+                {
+                    "name": "port",
+                    "bitwidth": 9
+                }
+            ],
             "primitives": [
                 {
                     "op": "modify_field",
@@ -1306,7 +1627,7 @@
                             "type": "field",
                             "value": [
                                 "tcp",
-                                "fin"
+                                "syn"
                             ]
                         },
                         {
@@ -1321,9 +1642,61 @@
                         {
                             "type": "field",
                             "value": [
+                                "tcp",
+                                "ack"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x1"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tcp",
+                                "seqNo"
+                            ]
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "meta",
+                                "dstip_pktcount"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
                                 "standard_metadata",
                                 "egress_spec"
                             ]
+                        },
+                        {
+                            "type": "runtime_data",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x5"
                         },
                         {
                             "type": "field",
@@ -1331,6 +1704,43 @@
                                 "meta",
                                 "in_port"
                             ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x4"
+                        },
+                        {
+                            "type": "field",
+                            "value": [
+                                "standard_metadata",
+                                "egress_spec"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "op": "register_write",
+                    "parameters": [
+                        {
+                            "type": "register_array",
+                            "value": "temp_write"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x3"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0xa"
                         }
                     ]
                 }
@@ -1441,40 +1851,17 @@
                     "expression": {
                         "type": "expression",
                         "value": {
-                            "op": "and",
+                            "op": "==",
                             "left": {
-                                "type": "expression",
-                                "value": {
-                                    "op": "==",
-                                    "left": {
-                                        "type": "field",
-                                        "value": [
-                                            "meta",
-                                            "tcp_syn"
-                                        ]
-                                    },
-                                    "right": {
-                                        "type": "hexstr",
-                                        "value": "0x1"
-                                    }
-                                }
+                                "type": "field",
+                                "value": [
+                                    "meta",
+                                    "tcp_syn"
+                                ]
                             },
                             "right": {
-                                "type": "expression",
-                                "value": {
-                                    "op": "<",
-                                    "left": {
-                                        "type": "field",
-                                        "value": [
-                                            "meta",
-                                            "dstip_pktcount"
-                                        ]
-                                    },
-                                    "right": {
-                                        "type": "hexstr",
-                                        "value": "0x4"
-                                    }
-                                }
+                                "type": "hexstr",
+                                "value": "0x1"
                             }
                         }
                     },
@@ -1533,40 +1920,17 @@
                     "expression": {
                         "type": "expression",
                         "value": {
-                            "op": "and",
+                            "op": "==",
                             "left": {
-                                "type": "expression",
-                                "value": {
-                                    "op": "==",
-                                    "left": {
-                                        "type": "field",
-                                        "value": [
-                                            "meta",
-                                            "tcp_ack"
-                                        ]
-                                    },
-                                    "right": {
-                                        "type": "hexstr",
-                                        "value": "0x1"
-                                    }
-                                }
+                                "type": "field",
+                                "value": [
+                                    "meta",
+                                    "tcp_ack"
+                                ]
                             },
                             "right": {
-                                "type": "expression",
-                                "value": {
-                                    "op": "<",
-                                    "left": {
-                                        "type": "field",
-                                        "value": [
-                                            "meta",
-                                            "dstip_pktcount"
-                                        ]
-                                    },
-                                    "right": {
-                                        "type": "hexstr",
-                                        "value": "0x4"
-                                    }
-                                }
+                                "type": "hexstr",
+                                "value": "0x1"
                             }
                         }
                     },
@@ -1624,8 +1988,27 @@
         {
             "name": "egress",
             "id": 1,
-            "init_table": null,
-            "tables": [],
+            "init_table": "dump_table",
+            "tables": [
+                {
+                    "name": "dump_table",
+                    "id": 4,
+                    "match_type": "exact",
+                    "type": "simple",
+                    "max_size": 16384,
+                    "with_counters": false,
+                    "direct_meters": null,
+                    "support_timeout": false,
+                    "key": [],
+                    "actions": [
+                        "dump"
+                    ],
+                    "next_tables": {
+                        "dump": null
+                    },
+                    "base_default_next": null
+                }
+            ],
             "action_profiles": [],
             "conditionals": []
         }

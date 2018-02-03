@@ -29,7 +29,7 @@ parser start {
 	set_metadata(meta.in_port, standard_metadata.ingress_port);
 
 	//register_write(temp_write,
-	//		   0,
+	//		   9,
 	//		   meta.in_port);
 	return  parse_ethernet;
 	
@@ -41,6 +41,8 @@ header ethernet_t ethernet;
 
 parser parse_ethernet {
 	extract(ethernet);
+	set_metadata(meta.eth_da,ethernet.dstAddr);
+	set_metadata(meta.eth_sa,ethernet.srcAddr);
 	return select(latest.etherType) {
 		ETHERTYPE_IPV4 : parse_ipv4;
 		default: ingress;
@@ -122,6 +124,7 @@ parser parse_tcp {
 	set_metadata(meta.tcp_rst, tcp.rst);
 	set_metadata(meta.tcp_syn, tcp.syn);
 	set_metadata(meta.tcp_fin, tcp.fin);	
+	set_metadata(meta.tcp_seq, tcp.seqNo);	
 	return ingress;
 }
 field_list tcp_checksum_list {
@@ -176,6 +179,8 @@ metadata intrinsic_metadata_t intrinsic_metadata;
 header_type meta_t {
 	fields {
 		do_forward : 1;
+	eth_sa:48;
+	eth_da:48;
         ipv4_sa : 32;
         ipv4_da : 32;
         tcp_sp : 16;
@@ -193,6 +198,7 @@ header_type meta_t {
 		tcp_rst:1;
 		tcp_syn:1;
 		tcp_fin:1;
+		tcp_seq:32;
 		tcp_session_map_index :  13;
 		dstip_pktcount_map_index: 13;
 								 
@@ -310,7 +316,10 @@ table session_check {
 
 action init_session()
 {
-	modify_field(meta.reply_type,1);
+	modify_field(meta.reply_type,3);
+	register_write(temp_write,9,meta.in_port);
+	register_write(temp_write,8,meta.in_port);
+	register_write(temp_write,7,13);
 	register_write(tcp_session_is_SYN, meta.tcp_session_map_index,
 					1);
 	register_write(tcp_session_is_ACK, meta.tcp_session_map_index,0);
@@ -329,6 +338,7 @@ action complete_session()
 	register_write(tcp_session_is_SYN, meta.tcp_session_map_index,
 					1);
 	register_write(tcp_session_is_ACK, meta.tcp_session_map_index,1);
+
 	
 }
 table session_complete_table {
@@ -342,19 +352,27 @@ action setsyn_ack(port)
 	modify_field(tcp.ack,1);
 	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
+	register_write(temp_write,5,meta.in_port);
+	register_write(temp_write,4,standard_metadata.egress_spec);
+	register_write(temp_write,3,10);
 
 }
 action sendback_sa()
 {
 	modify_field(tcp.syn,1);
 	modify_field(tcp.ack,1);
-	modify_field(tcp.seqNo, meta.dstip_pktcount);
+	modify_field(tcp.seqNo,0x0) ;
 	
-	register_write(temp_write,
-			   1,
-			   meta.in_port);
-
-
+	modify_field(tcp.ackNo,meta.tcp_seq);
+	add_to_field(tcp.ackNo,1);
+	modify_field(ipv4.dstAddr, meta.ipv4_sa);
+	modify_field(ipv4.srcAddr, meta.ipv4_da);
+	modify_field(tcp.srcPort, meta.tcp_dp);
+	modify_field(tcp.dstPort, meta.tcp_sp);
+	modify_field(ethernet.dstAddr, meta.eth_sa);
+	modify_field(ethernet.srcAddr, meta.eth_da);
+		
+	register_write(temp_write,8,meta.in_port);
 	modify_field(standard_metadata.egress_spec, meta.in_port);
 
 }
@@ -366,6 +384,15 @@ action sendback_session_construct()
 
 }
 
+action dump(){
+ 	register_write(temp_write,6,standard_metadata.egress_spec);
+ 	register_write(temp_write,5,meta.in_port);
+ 	register_write(temp_write,4,1);
+}
+
+table dump_table{
+	actions {dump;}
+}
 
 action setack(port)
 {
@@ -373,6 +400,7 @@ action setack(port)
 	modify_field(tcp.ack,1);
 	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
+ 	register_write(temp_write,4,19);
 }
 
 table forward_table{
@@ -402,7 +430,8 @@ table forward_table{
 
 control ingress {
 	apply(session_check);
-	if (meta.tcp_syn == 1 and meta.dstip_pktcount < 4 )
+
+	if (meta.tcp_syn == 1 /*and meta.dstip_pktcount < 4 */)
 	{
 		if (meta.tcp_session_is_SYN==0 and meta.tcp_session_is_ACK==0)
 		{
@@ -410,7 +439,7 @@ control ingress {
 		}
 
 	}
-	else if (meta.tcp_ack==1 and meta.dstip_pktcount < 4) 
+	else if (meta.tcp_ack==1 /*and meta.dstip_pktcount < 4*/) 
 	{
 		if (meta.tcp_session_is_SYN == 1 and meta.tcp_session_is_ACK == 0)
 		{
@@ -421,6 +450,7 @@ control ingress {
 	apply(forward_table);	
 }
 control egress {
+	apply(dump_table);
 }
 
 
