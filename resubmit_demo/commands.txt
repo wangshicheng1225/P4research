@@ -5,6 +5,8 @@ table_set_default handle_resubmit_table set_resubmit
 table_set_default relay_session_table relay_session
 table_set_default forward_normal_table _drop
 table_set_default forward_table _drop
+table_set_default outbound_tran_table outbound_transformation
+table_set_default inbound_tran_table inbound_transformation
 
 table_add session_check lookup_session_map 1 =>
 table_add session_check lookup_session_map_reverse 2 =>

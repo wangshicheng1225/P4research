@@ -26,9 +26,6 @@ parser start {
 	
 	set_metadata(meta.in_port, standard_metadata.ingress_port);
 
-	//register_write(temp_write,
-	//		   9,
-	//		   meta.in_port);
 	return  parse_ethernet;
 	
 }
@@ -198,8 +195,12 @@ header_type meta_t {
 		tcp_syn:1;
 		tcp_fin:1;
 		tcp_seqNo:32;
+		tcp_h1seq:32;
+		tcp_seqOffset:32;
 		tcp_ackNo:32;
-
+		tcp_h2seq:32;
+		tcp_ackOffset:32;
+		
 		tcp_session_map_index :  13;
 		dstip_pktcount_map_index: 13;
 tcp_session_id : 16;
@@ -294,6 +295,18 @@ register tcp_session_h2_reply_sa{
 	instance_count: 8192;
 }
 
+
+register h1_seq{
+	width : 32;
+	instance_count: 8192;
+}
+
+
+register h2_seq{
+	width : 32;
+	instance_count: 8192;
+}
+
 register dstip_pktcount {
 	width : 32; 
 	instance_count: 8192;
@@ -320,7 +333,7 @@ action lookup_session_map()
 {//from packet come in through port1
 	modify_field_with_hash_based_offset(meta.tcp_session_map_index,0,
 										tcp_session_map_hash, 13);
-
+	register_write(temp_write,5,meta.tcp_session_map_index);
 	modify_field_with_hash_based_offset(meta.dstip_pktcount_map_index,0,
 											dstip_map_hash,13);
 
@@ -347,6 +360,7 @@ action lookup_session_map()
 
 	register_read(meta.tcp_session_h2_reply_sa,
 				  tcp_session_h2_reply_sa, meta.tcp_session_map_index);
+	register_write(temp_write,4,meta.tcp_session_h2_reply_sa);
 
 }
 
@@ -407,8 +421,11 @@ action init_session()
 
 	register_write(tcp_session_h2_reply_sa, meta.tcp_session_map_index,0);
 
+	register_write(h1_seq, meta.tcp_session_map_index,meta.tcp_seqNo);
+
 //for debug
-	register_write(temp_write, 1,100);
+	register_write(temp_write, 1,meta.tcp_session_map_index);
+	register_write(temp_write, 2,meta.in_port);
 
 }
 
@@ -460,6 +477,7 @@ table handle_resubmit_table{
 action relay_session()
 {
 
+	register_write(temp_write,4,4);
 	modify_field(meta.reply_type,3);//not to drop  we should return a ack to h2 (don't forget to swap the ip and macs 
 
 
@@ -469,18 +487,83 @@ action relay_session()
 
 	register_write(tcp_session_h2_reply_sa, meta.tcp_session_map_index, 1);	
 
+	register_write(h2_seq,meta.tcp_session_map_index,meta.tcp_seqNo);
+
 //debig
 }
-table relay_session_table{
+table relay_session_table
+{
 	actions{
 		relay_session;
 	}	
 
 }
 
+action inbound_transformation()
+{
+	// seq here by pass
+	// ack should extract the initial seq given by switch, here 0ddkk
+/*
+        register_write(temp_write,8,8);
+	register_read(meta.tcp_h2seq,
+                                  h2_seq, meta.tcp_session_map_index);
+        subtract(meta.tcp_seqOffset,meta.tcp_seqNo,meta.tcp_h2seq);
+        add(meta.tcp_seqNo,meta.tcp_seqOffset,0);
+        modify_field(tcp.seqNo,meta.tcp_seqNo);
+*/
+
+        register_write(temp_write,8,8);
+	register_read(meta.tcp_h2seq,
+				  h2_seq, meta.tcp_session_map_index);
+	register_write(temp_write,6,meta.tcp_h2seq);
+	subtract(meta.tcp_ackOffset,meta.tcp_ackNo,0);
+	add(meta.tcp_ackNo,meta.tcp_ackOffset,meta.tcp_h2seq);
+	modify_field(tcp.ackNo,meta.tcp_ackNo);
+        modify_field(ipv4.ttl,32);
+}
+
+table inbound_tran_table
+{
+	actions{
+		inbound_transformation;
+	}
+}
+
+action outbound_transformation()
+{
+        register_write(temp_write,9,9);
+        register_write(temp_write,6,meta.tcp_h2seq);
+	register_read(meta.tcp_h2seq,
+				  h2_seq, meta.tcp_session_map_index);
+        subtract(meta.tcp_seqOffset,meta.tcp_seqNo,meta.tcp_h2seq);
+        add(meta.tcp_seqNo,meta.tcp_seqOffset,0);
+        modify_field(tcp.seqNo,meta.tcp_seqNo);
+        modify_field(ipv4.ttl,32);
+/*
+        register_read(meta.tcp_h2seq,
+                                  h2_seq, meta.tcp_session_map_index);
+        register_write(temp_write,6,meta.tcp_h2seq);
+        subtract(meta.tcp_ackOffset,meta.tcp_ackNo,0);
+        add(meta.tcp_ackNo,meta.tcp_ackOffset,meta.tcp_h2seq);
+        modify_field(tcp.ackNo,meta.tcp_ackNo);
+*/
+
+}
+
+table outbound_tran_table
+{
+        actions{
+                outbound_transformation;
+        }
+}
+
+
+
+
 //*************************forward_normal_table
 action set_forward_normal(port)
 {
+	register_write(temp_write,3,3);
 	modify_field(meta.reply_type, 5);
 	modify_field(meta.out_port,port); 
 
@@ -503,11 +586,13 @@ action forward_normal()
 	
 	//There should be seq or ack transform 
 	//change src mac and dst mac!!
+
 	modify_field(standard_metadata.egress_spec, meta.out_port);
 
 }
 action _resubmit()
 {// 04
+	register_write(temp_write,7,7);
 	resubmit(resubmit_FL);
 }
 
@@ -568,9 +653,9 @@ action sendh2syn(port)
 {
 	modify_field(tcp.syn,1);
 	modify_field(tcp.ack,0);
-//	modify_field(tcp.seqNo, meta.tcp_seqNo);// TODO:  in the future we should give proper value to  the seqNo of syn sent to h2
-//	add_to_field(tcp.seqNo, -1);
-	modify_field(tcp.seqNo,233);
+	modify_field(tcp.seqNo, meta.tcp_seqNo);// TODO:  in the future we should give proper value to  the seqNo of syn sent to h2
+	add_to_field(tcp.seqNo, -1);
+	//modify_field(tcp.seqNo,233);
 	modify_field(tcp.ackNo,0);
 	
 	modify_field(standard_metadata.egress_spec,port);
@@ -623,26 +708,31 @@ control ingress {
 	{
 		if (meta.in_port == 2 )//expandability will be too poor
 		{
-
-			apply(relay_session_table);
-			//check if it is syn/ack and change the register 
+			apply(relay_session_table); //check if it is syn/ack and change the register 
 		}	
 		else
 		{
 			//set the reply_type to let forward_table directly resubmit 
-	
+			//apply(inbound_tranformation_table);
 			apply(handle_resubmit_table);
 		}
 	}
 	else 
 	{
-		//forward normally
+		if (meta.in_port == 2 )
+		{
+			apply(outbound_tran_table);
+		}
+		else if	(meta.in_port == 1)
+		{
+			apply(inbound_tran_table);
+		}
 		apply(forward_normal_table);
 	
 	}
+
 	apply(forward_table);	
 }
 control egress {
-//	apply(dump_table);
 }
 
