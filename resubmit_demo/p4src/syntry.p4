@@ -122,7 +122,8 @@ parser parse_tcp {
 	set_metadata(meta.tcp_rst, tcp.rst);
 	set_metadata(meta.tcp_syn, tcp.syn);
 	set_metadata(meta.tcp_fin, tcp.fin);	
-	set_metadata(meta.tcp_seq, tcp.seqNo);	
+	set_metadata(meta.tcp_seqNo, tcp.seqNo);
+	set_metadata(meta.tcp_ackNo, tcp.ackNo);	
 	return ingress;
 }
 field_list tcp_checksum_list {
@@ -188,6 +189,7 @@ header_type meta_t {
         is_ext_if : 1;
         tcpLength : 16;
         in_port : 8;
+		out_port:8;
 	
 		reply_type:4;//00 noreply  01 syn/ack back to h1  02 syn to h2  03 undifined  04 resubmit 05forward the packet  
 		tcp_ack:1;
@@ -195,12 +197,12 @@ header_type meta_t {
 		tcp_rst:1;
 		tcp_syn:1;
 		tcp_fin:1;
-		tcp_seq:32;
+		tcp_seqNo:32;
+		tcp_ackNo:32;
 
 		tcp_session_map_index :  13;
 		dstip_pktcount_map_index: 13;
-
-		tcp_session_id : 16;
+tcp_session_id : 16;
 		
 		dstip_pktcount:32;	 
 	
@@ -298,7 +300,7 @@ register dstip_pktcount {
 }
 
 
-register temp_hash {
+register temp_state {
 	width:32;
 	instance_count: 10;
 }
@@ -397,12 +399,16 @@ table session_check {
 //**************************for session_init_table*******************
 action init_session()
 {
-	modify_field(meta.reply_type,1);//1 means forward_table should return a SA to h1
+	modify_field(meta.reply_type,1);//1 means forward_table should return a SA to h1i
+
 	register_write(tcp_session_is_SYN, meta.tcp_session_map_index,
 					1);
 	register_write(tcp_session_is_ACK, meta.tcp_session_map_index,0);
 
 	register_write(tcp_session_h2_reply_sa, meta.tcp_session_map_index,0);
+
+//for debug
+	register_write(temp_write, 1,100);
 
 }
 
@@ -424,7 +430,8 @@ action complete_session()
 
 	register_write(tcp_session_h2_reply_sa, meta.tcp_session_map_index, 0);	
 
-
+//for debug
+	register_write(temp_write, 2, 110);
 }
 table session_complete_table {
 	actions { complete_session;}
@@ -435,6 +442,8 @@ action set_resubmit()
 {
 	modify_field(meta.reply_type, 4);//4 means just resubmit it 
 //	resubmit(resubmit_FL);
+//debug
+	register_write(temp_write,3,111);
 }
 
 table handle_resubmit_table{
@@ -451,7 +460,7 @@ table handle_resubmit_table{
 action relay_session()
 {
 
-	modify_field(meta.reply_type,0);//to drop
+	modify_field(meta.reply_type,3);//not to drop  we should return a ack to h2 (don't forget to swap the ip and macs 
 
 
 	register_write(tcp_session_is_SYN, meta.tcp_session_map_index,
@@ -460,7 +469,7 @@ action relay_session()
 
 	register_write(tcp_session_h2_reply_sa, meta.tcp_session_map_index, 1);	
 
-
+//debig
 }
 table relay_session_table{
 	actions{
@@ -470,13 +479,18 @@ table relay_session_table{
 }
 
 //*************************forward_normal_table
-action set_forward_normal()
+action set_forward_normal(port)
 {
 	modify_field(meta.reply_type, 5);
+	modify_field(meta.out_port,port); 
+
 }
 
 table forward_normal_table
 {
+	reads{
+		meta.in_port:exact;
+	}
 	actions{
 		set_forward_normal;
 	}
@@ -484,12 +498,12 @@ table forward_normal_table
 
 
 //**********for forward_table 
-action forward_normal(port)
+action forward_normal()
 {//////05
 	
 	//There should be seq or ack transform 
 	//change src mac and dst mac!!
-	modify_field(standard_metadata.egress_spec, port);
+	modify_field(standard_metadata.egress_spec, meta.out_port);
 
 }
 action _resubmit()
@@ -504,7 +518,7 @@ action sendback_sa()
 	modify_field(tcp.ack,1);
 	modify_field(tcp.seqNo,0x0) ;
 	
-	modify_field(tcp.ackNo,meta.tcp_seq);
+	modify_field(tcp.ackNo,meta.tcp_seqNo);
 	add_to_field(tcp.ackNo,1);
 	modify_field(ipv4.dstAddr, meta.ipv4_sa);
 	modify_field(ipv4.srcAddr, meta.ipv4_da);
@@ -532,11 +546,33 @@ action setack(port)
 	modify_field(tcp.seqNo, meta.dstip_pktcount);
 	modify_field(standard_metadata.egress_spec, port);
 }
+action sendh2ack()
+{
+	modify_field(tcp.syn,0);
+	modify_field(tcp.ack,1);
+	modify_field(tcp.ackNo, meta.tcp_seqNo);
+	add_to_field(tcp.ackNo,1);
+
+	modify_field(tcp.seqNo,meta.tcp_ackNo) ;
+	modify_field(ipv4.dstAddr, meta.ipv4_sa);
+	modify_field(ipv4.srcAddr, meta.ipv4_da);
+	modify_field(tcp.srcPort, meta.tcp_dp);
+	modify_field(tcp.dstPort, meta.tcp_sp);
+	modify_field(ethernet.dstAddr, meta.eth_sa);
+	modify_field(ethernet.srcAddr, meta.eth_da);
+		
+	modify_field(standard_metadata.egress_spec, meta.in_port);
+
+}
 action sendh2syn(port)
 {
 	modify_field(tcp.syn,1);
 	modify_field(tcp.ack,0);
-	modify_field(tcp.seqNo, 233);// TODO:  in the future we should give proper value to  the seqNo of syn sent to h2
+//	modify_field(tcp.seqNo, meta.tcp_seqNo);// TODO:  in the future we should give proper value to  the seqNo of syn sent to h2
+//	add_to_field(tcp.seqNo, -1);
+	modify_field(tcp.seqNo,233);
+	modify_field(tcp.ackNo,0);
+	
 	modify_field(standard_metadata.egress_spec,port);
 }
 
@@ -549,9 +585,9 @@ table forward_table{
 	actions{
 		forward_normal;//05
 		_resubmit;//04
-
+		sendh2ack;// 03
 		sendh2syn;//02
-		sendback_sa;
+		sendback_sa;//01
 		sendback_session_construct;
 		_drop;//0
 	
