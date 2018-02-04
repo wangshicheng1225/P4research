@@ -59,8 +59,9 @@ class MyTopo(Topo):
         self.addLink(h1,switch)
 #external host
         h2 = self.addHost('h2',
-                          ip = "192.168.0.10",
-                          mac = "00:05:00:00:00:10")
+          #                ip = "192.168.0.10",
+                           ip = "10.0.0.20",
+                           mac = "00:05:00:00:00:10")
         self.addLink(h2, switch)
                     
 
@@ -81,10 +82,13 @@ def main():
     
     sw_addrs = ["10.0.0.1", "192.168.0.1"]
     
+    h_macs = ["00:05:00:00:00:10","00:04:00:00:00:10"]
+    h_addrs = ['10.0.0.20','10.0.0.10']
+    
     for n in xrange(2):
         h = net.get('h%d' %(n+1))
-        h.setARP(sw_addrs[n], sw_macs[n])
-        h.setDefaultRoute("dev eth0 via %s" % sw_addrs[n])
+        h.setARP(h_addrs[n], h_macs[n])
+  #      h.setDefaultRoute("dev eth0 via %s" % sw_addrs[n])
     
     for n in xrange(2):
         h = net.get('h%d' % (n+1))
@@ -113,4 +117,4 @@ def main():
 
 if __name__ == '__main__':
     setLogLevel( 'info' )
-    main() 233
+    main() 
