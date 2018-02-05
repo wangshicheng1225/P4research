@@ -159,19 +159,7 @@ calculated_field tcp.checksum {
     update tcp_checksum if(valid(tcp));
 }
 
-
-header_type intrinsic_metadata_t {
-	fields {
-		mcast_grp:4;
-		egress_rid:4;
-		mcast_hash:16;
-		lf_field_list:32;
 			
-	}
-}
-
-metadata intrinsic_metadata_t intrinsic_metadata;
-
 header_type meta_t {
 	fields {
 		eth_sa:48;
@@ -188,7 +176,7 @@ header_type meta_t {
         in_port : 8;
 		out_port:8;
 	
-		reply_type:4;//00 noreply  01 syn/ack back to h1  02 syn to h2  03 undifined  04 resubmit 05forward the packet  
+		reply_type:4;//0 drop  1 syn/ack back to h1  02 syn to h2  03 send h2 ack  04 resubmit 05 forward the packet as normal  
 		tcp_ack:1;
 		tcp_psh:1;
 		tcp_rst:1;
@@ -205,7 +193,7 @@ header_type meta_t {
 		dstip_pktcount_map_index: 13;
 tcp_session_id : 16;
 		
-		dstip_pktcount:32;	 
+		dstip_pktcount:32;// how many packets have been sent to this dst IP address	 
 	
 
 		tcp_session_is_SYN: 8;// this session has sent a syn to switch
@@ -227,13 +215,16 @@ field_list l3_hash_fields {
 
 	tcp.dstPort;
 }
+//get the hash according to the 5-touple of this packet
 field_list_calculation tcp_session_map_hash {
 	input {
 		l3_hash_fields;
 	}
 	algorithm: crc16;
 	output_width: 13;
+
 }
+
 
 field_list reverse_l3_hash_fields {
 
@@ -246,7 +237,8 @@ field_list reverse_l3_hash_fields {
 
 
 }
-
+//reverse the src address and dst address, src port and dst port, to get the hash of the reply-packet of this packet 
+//for example: h1 has a session with h2, according the reverse-hash of packet from h2, we can get the hash of packet from h1.
 field_list_calculation reverse_tcp_session_map_hash{
 	input {
 		reverse_l3_hash_fields;
@@ -312,18 +304,7 @@ register dstip_pktcount {
 	instance_count: 8192;
 }
 
-
-register temp_state {
-	width:32;
-	instance_count: 10;
-}
-
-register temp_write {
-	width:32;
-	instance_count: 10;
 	
-}
-
 
 action _drop() {
 	drop();
@@ -333,12 +314,10 @@ action lookup_session_map()
 {//from packet come in through port1
 	modify_field_with_hash_based_offset(meta.tcp_session_map_index,0,
 										tcp_session_map_hash, 13);
-	register_write(temp_write,5,meta.tcp_session_map_index);
 	modify_field_with_hash_based_offset(meta.dstip_pktcount_map_index,0,
 											dstip_map_hash,13);
 
 
-	//dstip_pktcount_map_index : 13;
 	
 	register_read(meta.dstip_pktcount,
 				 dstip_pktcount, meta.dstip_pktcount_map_index);
@@ -360,12 +339,11 @@ action lookup_session_map()
 
 	register_read(meta.tcp_session_h2_reply_sa,
 				  tcp_session_h2_reply_sa, meta.tcp_session_map_index);
-	register_write(temp_write,4,meta.tcp_session_h2_reply_sa);
 
 }
 
 action lookup_session_map_reverse()
-{//for packet come in through port2
+{//for packet come in through port2, get the reverse-hash
 
 	modify_field_with_hash_based_offset(meta.tcp_session_map_index,0,
 										reverse_tcp_session_map_hash, 13);
@@ -374,7 +352,6 @@ action lookup_session_map_reverse()
 											dstip_map_hash,13);
 
 
-	//dstip_pktcount_map_index : 13;
 	
 	register_read(meta.dstip_pktcount,
 				 dstip_pktcount, meta.dstip_pktcount_map_index);
@@ -423,9 +400,6 @@ action init_session()
 
 	register_write(h1_seq, meta.tcp_session_map_index,meta.tcp_seqNo);
 
-//for debug
-	register_write(temp_write, 1,meta.tcp_session_map_index);
-	register_write(temp_write, 2,meta.in_port);
 
 }
 
@@ -447,8 +421,6 @@ action complete_session()
 
 	register_write(tcp_session_h2_reply_sa, meta.tcp_session_map_index, 0);	
 
-//for debug
-	register_write(temp_write, 2, 110);
 }
 table session_complete_table {
 	actions { complete_session;}
@@ -458,9 +430,6 @@ table session_complete_table {
 action set_resubmit()
 {
 	modify_field(meta.reply_type, 4);//4 means just resubmit it 
-//	resubmit(resubmit_FL);
-//debug
-	register_write(temp_write,3,111);
 }
 
 table handle_resubmit_table{
@@ -477,7 +446,6 @@ table handle_resubmit_table{
 action relay_session()
 {
 
-	register_write(temp_write,4,4);
 	modify_field(meta.reply_type,3);//not to drop  we should return a ack to h2 (don't forget to swap the ip and macs 
 
 
@@ -489,7 +457,6 @@ action relay_session()
 
 	register_write(h2_seq,meta.tcp_session_map_index,meta.tcp_seqNo);
 
-//debig
 }
 table relay_session_table
 {
@@ -503,19 +470,9 @@ action inbound_transformation()
 {
 	// seq here by pass
 	// ack should extract the initial seq given by switch, here 0ddkk
-/*
-        register_write(temp_write,8,8);
-	register_read(meta.tcp_h2seq,
-                                  h2_seq, meta.tcp_session_map_index);
-        subtract(meta.tcp_seqOffset,meta.tcp_seqNo,meta.tcp_h2seq);
-        add(meta.tcp_seqNo,meta.tcp_seqOffset,0);
-        modify_field(tcp.seqNo,meta.tcp_seqNo);
-*/
 
-        register_write(temp_write,8,8);
 	register_read(meta.tcp_h2seq,
 				  h2_seq, meta.tcp_session_map_index);
-	register_write(temp_write,6,meta.tcp_h2seq);
 	subtract(meta.tcp_ackOffset,meta.tcp_ackNo,0);
 	add(meta.tcp_ackNo,meta.tcp_ackOffset,meta.tcp_h2seq);
 	modify_field(tcp.ackNo,meta.tcp_ackNo);
@@ -531,22 +488,12 @@ table inbound_tran_table
 
 action outbound_transformation()
 {
-        register_write(temp_write,9,9);
-        register_write(temp_write,6,meta.tcp_h2seq);
 	register_read(meta.tcp_h2seq,
 				  h2_seq, meta.tcp_session_map_index);
         subtract(meta.tcp_seqOffset,meta.tcp_seqNo,meta.tcp_h2seq);
         add(meta.tcp_seqNo,meta.tcp_seqOffset,0);
         modify_field(tcp.seqNo,meta.tcp_seqNo);
         modify_field(ipv4.ttl,32);
-/*
-        register_read(meta.tcp_h2seq,
-                                  h2_seq, meta.tcp_session_map_index);
-        register_write(temp_write,6,meta.tcp_h2seq);
-        subtract(meta.tcp_ackOffset,meta.tcp_ackNo,0);
-        add(meta.tcp_ackNo,meta.tcp_ackOffset,meta.tcp_h2seq);
-        modify_field(tcp.ackNo,meta.tcp_ackNo);
-*/
 
 }
 
@@ -563,7 +510,6 @@ table outbound_tran_table
 //*************************forward_normal_table
 action set_forward_normal(port)
 {
-	register_write(temp_write,3,3);
 	modify_field(meta.reply_type, 5);
 	modify_field(meta.out_port,port); 
 
@@ -575,6 +521,7 @@ table forward_normal_table
 		meta.in_port:exact;
 	}
 	actions{
+		_drop;
 		set_forward_normal;
 	}
 }
@@ -592,7 +539,6 @@ action forward_normal()
 }
 action _resubmit()
 {// 04
-	register_write(temp_write,7,7);
 	resubmit(resubmit_FL);
 }
 
@@ -653,9 +599,8 @@ action sendh2syn(port)
 {
 	modify_field(tcp.syn,1);
 	modify_field(tcp.ack,0);
-	modify_field(tcp.seqNo, meta.tcp_seqNo);// TODO:  in the future we should give proper value to  the seqNo of syn sent to h2
+	modify_field(tcp.seqNo, meta.tcp_seqNo);
 	add_to_field(tcp.seqNo, -1);
-	//modify_field(tcp.seqNo,233);
 	modify_field(tcp.ackNo,0);
 	
 	modify_field(standard_metadata.egress_spec,port);
@@ -668,7 +613,7 @@ table forward_table{
 	}
 
 	actions{
-		forward_normal;//05
+		forward_normal;//reply_type:05
 		_resubmit;//04
 		sendh2ack;// 03
 		sendh2syn;//02
@@ -678,15 +623,6 @@ table forward_table{
 	
 	}
 }
-/*
- *
-		tcp_ack:1;
-		tcp_psh:1;
-		tcp_rst:1;
-		tcp_syn:1;
-		tcp_fin:1;
- *
- * */
 
 control ingress {
 	apply(session_check);
