@@ -24,7 +24,7 @@ header_type ipv4_t {
 } 
 parser start {
 	
-	set_metadata(meta.in_port, standard_metadata.ingress_port);
+	set_metadata(meta.in_port, standard_metadata.ingress_port);//
 
 	return  parse_ethernet;
 	
@@ -191,7 +191,7 @@ header_type meta_t {
 		
 		tcp_session_map_index :  13;
 		dstip_pktcount_map_index: 13;
-tcp_session_id : 16;
+		tcp_session_id : 16;
 		
 		dstip_pktcount:32;// how many packets have been sent to this dst IP address	 
 	
